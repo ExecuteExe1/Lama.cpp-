@@ -2,7 +2,7 @@
 
 This repository was solely created for the documentation and study of Lama.cpp
 
-#Skeleton of the Repo:
+# Skeleton of the Repo:
 
 -Guide for installing Lama.cpp
 -Explanation of its Architecture
