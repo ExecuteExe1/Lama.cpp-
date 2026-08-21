@@ -26,7 +26,6 @@ An exploration of the internal architecture of llama.cpp, including:
 * CPU and GPU execution
 * Main computational components
 * Memory management
-* Relevant `ggml` operations
 
 ### 3. Running & Optimizing llama.cpp
 
