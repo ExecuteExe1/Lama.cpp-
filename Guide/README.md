@@ -122,7 +122,7 @@ You can then run the CLI tools from there.
 
 ---
 
-## Finish
+## Finished
 
 You now have **llama.cpp built with CUDA support** and are ready to run GGUF models locally.
 
