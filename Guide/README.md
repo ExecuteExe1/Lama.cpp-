@@ -1,38 +1,140 @@
-# This is a Guide on how to install Lama.cpp and its dependencies.
-# Follow each step and be ready to experiment!
+# Llama.cpp + CUDA Setup Guide
 
-# Step 1 "Dependencies"
+A quick guide to installing **[llama.cpp](https://github.com/ggml-org/llama.cpp)** and building it with **CUDA support** on WSL.
 
-on WSL run
+> Follow the steps below in order, then you're ready to start experimenting with local LLMs!
 
-sudo apt update 
+## Prerequisites
+
+This guide assumes you are using:
+
+* 🐧 **WSL2 / Ubuntu**
+* 🎮 An **NVIDIA GPU**
+* 🛠️ NVIDIA drivers with CUDA support
+
+## Step1 Install Dependencies
+
+First, update your package lists and install the required build tools:
+
+```bash
+sudo apt update
 sudo apt install -y git cmake build-essential
 sudo apt install -y libssl-dev
+```
 
-In case you need to check your Graphics card and cuda tools:
+### Step 2 Check Your GPU & CUDA
 
- nvidia-smi
- nvcc --version
+You can verify that your NVIDIA GPU is visible from WSL with:
 
- if the cuda-toolbox is NOT installed you can install it by:
-sudo apt install nvidia-cuda-toolkit
+```bash
+nvidia-smi
+```
 
-# Step 2 Llama.cpp installation
- Go to your desired folder and hit
+Check whether the CUDA compiler is installed:
 
- git clone https://github.com/ggml-org/llama.cpp.git
+```bash
+nvcc --version
+```
 
- get into the folder with cd llama.cpp
+If `nvcc` is not available, you can install the CUDA toolkit with:
 
-# Step 3 Build with Cuda
+```bash
+sudo apt install -y nvidia-cuda-toolkit
+```
 
-Run 
+>  **Note:** For newer NVIDIA/WSL setups, the recommended CUDA installation method may differ from the Ubuntu repository package. Make sure your NVIDIA driver and CUDA toolkit versions are compatible.
 
+---
+
+## Step3 Clone llama.cpp
+
+Navigate to the directory where you want to store the project:
+
+```bash
+cd ~/Work
+```
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ggml-org/llama.cpp.git
+```
+
+Enter the project directory:
+
+```bash
+cd llama.cpp
+```
+
+---
+
+## Step4 ⚙️ Configure the Build with CUDA
+
+Configure `llama.cpp` with CUDA support enabled:
+
+```bash
 cmake -B build -DGGML_CUDA=ON
+```
 
-Now check how many cores are given to your WSL so you can run the next command much faster.I had 4 cores therefore:
+If CMake completes successfully, you're ready to build.
 
+---
+
+## Step5 Build llama.cpp
+
+You can speed up compilation by allowing CMake to use multiple CPU cores.
+
+First, check how many processors WSL can see:
+
+```bash
+nproc
+```
+
+For example, if WSL reports **4 cores**, build using:
+
+```bash
 cmake --build build --config Release -j4
+```
+
+You can replace `4` with the number returned by `nproc`:
+
+```bash
+cmake --build build --config Release -j$(nproc)
+```
+
+---
+
+## Step6 Verify the Build
+
+Once compilation finishes, you should have the llama.cpp executables inside:
+
+```text
+build/bin/
+```
+
+For example:
+
+```bash
+ls build/bin
+```
+
+You can then run the CLI tools from there.
+
+---
+
+## Finish
+
+You now have **llama.cpp built with CUDA support** and are ready to run GGUF models locally.
+
+### What's next?
+
+* Download a **GGUF** model
+*  Run a model with `llama-cli`
+*  Experiment with GPU offloading
+*  Profile performance with tools such as `perf` or **NVIDIA Nsight Systems**
+*  Experiment with different quantization levels
+
+Good Luck on your studies/experiments!
 
 
 
