@@ -6,7 +6,7 @@ The goal is to understand how different `llama.cpp` configuration options affect
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 * [1. Model](#1-model)
 * [2. CPU-Only Inference](#2-cpu-only-inference)
@@ -173,7 +173,7 @@ For example:
     -fa on
 ```
 
-## 🧠 What is Flash Attention?
+##  What is Flash Attention?
 
 Mistral is based on the **Transformer architecture**, which relies heavily on the attention mechanism.
 
@@ -394,7 +394,7 @@ These experiments demonstrate an important aspect of LLM inference:
 
 > **The fastest configuration depends heavily on the workload.**
 
-### 🚀 GPU Acceleration
+###  GPU Acceleration
 
 Moving inference from the CPU to the RTX 5050 produced a major performance improvement.
 
@@ -406,7 +406,7 @@ The total runtime for the simple test decreased from approximately:
 
 This demonstrates the importance of GPU acceleration for local LLM inference.
 
-### ⚡ Flash Attention
+###  Flash Attention
 
 Flash Attention produced very different results depending on context size.
 
@@ -432,7 +432,7 @@ A feature that appears slower under one workload may become significantly more u
 
 ---
 
-## 🔬 What I Want to Explore Next
+##  What I Want to Explore Next
 
 Some possible future experiments:
 
@@ -450,7 +450,7 @@ Some possible future experiments:
 
 ---
 
-## 📚 Useful Resources
+##  Useful Resources
 
 * [llama.cpp](https://github.com/ggml-org/llama.cpp)
 * [Hugging Face](https://huggingface.co/)
