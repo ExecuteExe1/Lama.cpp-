@@ -432,23 +432,6 @@ A feature that appears slower under one workload may become significantly more u
 
 ---
 
-##  What I Want to Explore Next
-
-Some possible future experiments:
-
-* [ ] Test larger context sizes such as `32768`
-* [ ] Compare different quantization formats
-* [ ] Compare different Mistral models
-* [ ] Measure VRAM usage
-* [ ] Measure CPU utilization
-* [ ] Profile llama.cpp with `perf`
-* [ ] Profile CUDA execution with NVIDIA Nsight Systems
-* [ ] Investigate individual `ggml` operations
-* [ ] Compare different GPU layer counts with `-ngl`
-* [ ] Test batch size effects
-* [ ] Compare different sampling configurations
-
----
 
 ##  Useful Resources
 
