@@ -1,4 +1,4 @@
-# llama.cpp — Local LLM Experimentation & Benchmarking
+# llama.cpp — How to run and Observations
 
 This repository documents my experiments with **[llama.cpp](https://github.com/ggml-org/llama.cpp)**, focusing on local Large Language Model (LLM) inference, CPU vs GPU acceleration, Flash Attention, and context-size performance.
 
