@@ -1,1 +1,989 @@
-q
+# Assembly Breakdown
+
+This section contains a cleaned version of the `perf annotate` output.
+The profiling percentages, navigation arrows, and TUI decorations have been removed so the assembly can be explained line-by-line.
+
+> **How to use:** Add the meaning of each instruction in the **Explanation** column.
+
+| # | Assembly instruction | Explanation |
+|---:|---|---|
+| 1 | `push %r15` | |
+| 2 | `mov %rsi,%r15` | |
+| 3 | `push %r14` | |
+| 4 | `mov %edx,%r14d` | |
+| 5 | `push %r13` | |
+| 6 | `push %r12` | |
+| 7 | `push %rbp` | |
+| 8 | `push %rbx` | |
+| 9 | `mov %rdi,%rbx` | |
+| 10 | `mov %rsi,%rdi` | |
+| 11 | `sub $0x78,%rsp` | |
+| 12 | `mov %ecx,0x14(%rsp)` | |
+| 13 | `mov %fs:0x28,%rax` | |
+| 14 | `mov %rax,0x68(%rsp)` | |
+| 15 | `xor %eax,%eax` | |
+| 16 | `call llama_synchronize@plt` | |
+| 17 | `lea 0x30(%rsp),%rax` | |
+| 18 | `movzbl 0x6d(%rbx),%edx` | |
+| 19 | `lea 0x270(%rbx),%rsi` | |
+| 20 | `mov %rax,%rdi` | |
+| 21 | `mov %rax,0x8(%rsp)` | |
+| 22 | `call common_time_meas::common_time_meas(long&, bool)@plt` | |
+| 23 | `mov %r14d,%esi` | |
+| 24 | `mov %r15,%rdi` | |
+| 25 | `call llama_get_sampled_probs_ith@plt` | |
+| 26 | `mov %r14d,%esi` | |
+| 27 | `mov %r15,%rdi` | |
+| 28 | `mov %rax,%r13` | |
+| 29 | `call llama_get_sampled_logits_ith@plt` | |
+| 30 | `mov %r14d,%esi` | |
+| 31 | `mov %r15,%rdi` | |
+| 32 | `mov %r14d,(%rsp)` | |
+| 33 | `mov %rax,%rbp` | |
+| 34 | `call llama_get_sampled_candidates_ith@plt` | |
+| 35 | `mov %r15,%rdi` | |
+| 36 | `mov %rax,%r12` | |
+| 37 | `call llama_get_model@plt` | |
+| 38 | `mov %rax,%rdi` | |
+| 39 | `call llama_model_get_vocab@plt` | |
+| 40 | `mov %rax,%rdi` | |
+| 41 | `call llama_vocab_n_tokens@plt` | |
+| 42 | `mov (%rsp),%esi` | |
+| 43 | `mov %eax,%r14d` | |
+| 44 | `mov %r15,%rdi` | |
+| 45 | `test %r13,%r13` | |
+| 46 | `je 370` | |
+| 47 | `call llama_get_sampled_probs_count_ith@plt` | |
+| 48 | `mov 0x240(%rbx),%rcx` | |
+| 49 | `mov %eax,%r11d` | |
+| 50 | `mov 0x238(%rbx),%rdx` | |
+| 51 | `movabs $0xaaaaaaaaaaaaaaab,%rdi` | |
+| 52 | `mov %r11,0x18(%rsp)` | |
+| 53 | `mov %r11,%r14` | |
+| 54 | `mov %rcx,%rax` | |
+| 55 | `sub %rdx,%rax` | |
+| 56 | `sar $0x2,%rax` | |
+| 57 | `imul %rdi,%rax` | |
+| 58 | `mov %rax,%rsi` | |
+| 59 | `cmp %r11,%rax` | |
+| 60 | `jb 9f8` | |
+| 61 | `cmp %rsi,%r11` | |
+| 62 | `jb 9c8` | |
+| 63 | `f7: test %r14d,%r14d` | |
+| 64 | `je 2a0` | |
+| 65 | `100: cmp $0x4,%r14d` | |
+| 66 | `jbe 960` | |
+| 67 | `mov 0x18(%rsp),%rcx` | |
+| 68 | `lea 0x4(%rdx),%rdi` | |
+| 69 | `lea 0x0(,%rcx,4),%rax` | |
+| 70 | `lea (%rcx,%rcx,2),%rcx` | |
+| 71 | `shl $0x2,%rcx` | |
+| 72 | `lea 0x0(%r13,%rax,1),%r8` | |
+| 73 | `lea (%rdx,%rcx,1),%r9` | |
+| 74 | `cmp %r8,%rdi` | |
+| 75 | `setae %r8b` | |
+| 76 | `cmp %r9,%r13` | |
+| 77 | `setae %r10b` | |
+| 78 | `or %r10d,%r8d` | |
+| 79 | `lea 0x0(%rbp,%rax,1),%r10` | |
+| 80 | `cmp %r10,%rdi` | |
+| 81 | `setae %dil` | |
+| 82 | `cmp %r9,%rbp` | |
+| 83 | `setae %r9b` | |
+| 84 | `or %r9d,%edi` | |
+| 85 | `test %dil,%r8b` | |
+| 86 | `je 960` | |
+| 87 | `lea -0x8(%rdx,%rcx,1),%rcx` | |
+| 88 | `cmp %rcx,%r12` | |
+| 89 | `setae %cl` | |
+| 90 | `add %r12,%rax` | |
+| 91 | `cmp %rax,%rdx` | |
+| 92 | `setae %al` | |
+| 93 | `or %al,%cl` | |
+| 94 | `je 960` | |
+| 95 | `mov %r14d,%ecx` | |
+| 96 | `mov %rdx,0x18(%rsp)` | |
+| 97 | `mov %rdx,%rax` | |
+| 98 | `shr $0x2,%ecx` | |
+| 99 | `shl $0x4,%rcx` | |
+| 100 | `mov %rcx,%rdi` | |
+| 101 | `xor %ecx,%ecx` | |
+| 102 | `mov %rdi,%rdx` | |
+| 103 | `nop` | |
+| 104 | `198: lea (%r12,%rcx,1),%rdi` | |
+| 105 | `add $0x30,%rax` | |
+| 106 | `mov 0xc(%rdi),%r8d` | |
+| 107 | `mov 0x8(%rdi),%r9d` | |
+| 108 | `mov 0x4(%rdi),%r10d` | |
+| 109 | `mov (%rdi),%r11d` | |
+| 110 | `lea 0x0(%rbp,%rcx,1),%rdi` | |
+| 111 | `movss 0xc(%rdi),%xmm0` | |
+| 112 | `movss 0x8(%rdi),%xmm1` | |
+| 113 | `movss 0x4(%rdi),%xmm2` | |
+| 114 | `movss (%rdi),%xmm3` | |
+| 115 | `lea 0x0(%r13,%rcx,1),%rdi` | |
+| 116 | `add $0x10,%rcx` | |
+| 117 | `movss 0xc(%rdi),%xmm4` | |
+| 118 | `movss 0x8(%rdi),%xmm5` | |
+| 119 | `movss 0x4(%rdi),%xmm6` | |
+| 120 | `movss (%rdi),%xmm7` | |
+| 121 | `mov %r11d,-0x30(%rax)` | |
+| 122 | `unpcklps %xmm5,%xmm1` | |
+| 123 | `unpcklps %xmm4,%xmm0` | |
+| 124 | `mov %r10d,-0x24(%rax)` | |
+| 125 | `unpcklps %xmm7,%xmm3` | |
+| 126 | `unpcklps %xmm6,%xmm2` | |
+| 127 | `mov %r9d,-0x18(%rax)` | |
+| 128 | `mov %r8d,-0xc(%rax)` | |
+| 129 | `movlps %xmm3,-0x2c(%rax)` | |
+| 130 | `movlps %xmm2,-0x20(%rax)` | |
+| 131 | `movlps %xmm1,-0x14(%rax)` | |
+| 132 | `movlps %xmm0,-0x8(%rax)` | |
+| 133 | `cmp %rdx,%rcx` | |
+| 134 | `jne 198` | |
+| 135 | `mov %r14d,%eax` | |
+| 136 | `mov 0x18(%rsp),%rdx` | |
+| 137 | `and $0xfffffffc,%eax` | |
+| 138 | `test $0x3,%r14b` | |
+| 139 | `je 2a0` | |
+| 140 | `mov %eax,%ecx` | |
+| 141 | `movss 0x0(%r13,%rcx,4),%xmm1` | |
+| 142 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
+| 143 | `lea (%rcx,%rcx,2),%rdi` | |
+| 144 | `mov (%r12,%rcx,4),%r8d` | |
+| 145 | `lea (%rdx,%rdi,4),%rdi` | |
+| 146 | `lea 0x1(%rax),%ecx` | |
+| 147 | `unpcklps %xmm1,%xmm0` | |
+| 148 | `mov %r8d,(%rdi)` | |
+| 149 | `movlps %xmm0,0x4(%rdi)` | |
+| 150 | `cmp %r14d,%ecx` | |
+| 151 | `jae 2a0` | |
+| 152 | `movss 0x0(%r13,%rcx,4),%xmm1` | |
+| 153 | `mov (%r12,%rcx,4),%r8d` | |
+| 154 | `lea (%rcx,%rcx,2),%rdi` | |
+| 155 | `add $0x2,%eax` | |
+| 156 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
+| 157 | `lea (%rdx,%rdi,4),%rdi` | |
+| 158 | `mov %r8d,(%rdi)` | |
+| 159 | `unpcklps %xmm1,%xmm0` | |
+| 160 | `movlps %xmm0,0x4(%rdi)` | |
+| 161 | `cmp %r14d,%eax` | |
+| 162 | `jae 2a0` | |
+| 163 | `mov (%r12,%rax,4),%edi` | |
+| 164 | `lea (%rax,%rax,2),%rcx` | |
+| 165 | `movss 0x0(%r13,%rax,4),%xmm1` | |
+| 166 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 167 | `lea (%rdx,%rcx,4),%rcx` | |
+| 168 | `mov %edi,(%rcx)` | |
+| 169 | `unpcklps %xmm1,%xmm0` | |
+| 170 | `movlps %xmm0,0x4(%rcx)` | |
+| 171 | `nop` | |
+| 172 | `2a0: mov %rsi,0x258(%rbx)` | |
+| 173 | `mov (%rsp),%esi` | |
+| 174 | `mov %r15,%rdi` | |
+| 175 | `mov %rdx,0x250(%rbx)` | |
+| 176 | `movq $0xffffffffffffffff,0x260(%rbx)` | |
+| 177 | `movb $0x0,0x268(%rbx)` | |
+| 178 | `call llama_get_sampled_token_ith@plt` | |
+| 179 | `mov %eax,%ebp` | |
+| 180 | `cmp $0xffffffff,%eax` | |
+| 181 | `je 568` | |
+| 182 | `call common_log_get_verbosity_thold()@plt` | |
+| 183 | `cmp $0x4,%eax` | |
+| 184 | `jg 998` | |
+| 185 | `2e4: cmpq $0x0,0x1e8(%rbx)` | |
+| 186 | `jne 105e` | |
+| 187 | `cmpq $0x0,0x1f0(%rbx)` | |
+| 188 | `jne 1029` | |
+| 189 | `mov 0x258(%rbx),%rcx` | |
+| 190 | `test %rcx,%rcx` | |
+| 191 | `je 338` | |
+| 192 | `mov 0x250(%rbx),%rdx` | |
+| 193 | `xor %eax,%eax` | |
+| 194 | `jmp 32d` | |
+| 195 | `nop` | |
+| 196 | `320: add $0x1,%rax` | |
+| 197 | `add $0xc,%rdx` | |
+| 198 | `cmp %rax,%rcx` | |
+| 199 | `je 338` | |
+| 200 | `32d: cmp %ebp,(%rdx)` | |
+| 201 | `jne 320` | |
+| 202 | `mov %rax,0x260(%rbx)` | |
+| 203 | `338: mov 0x8(%rsp),%rdi` | |
+| 204 | `call common_time_meas::~common_time_meas()@plt` | |
+| 205 | `mov 0x68(%rsp),%rax` | |
+| 206 | `sub %fs:0x28,%rax` | |
+| 207 | `jne f91` | |
+| 208 | `add $0x78,%rsp` | |
+| 209 | `mov %ebp,%eax` | |
+| 210 | `pop %rbx` | |
+| 211 | `pop %rbp` | |
+| 212 | `pop %r12` | |
+| 213 | `pop %r13` | |
+| 214 | `pop %r14` | |
+| 215 | `pop %r15` | |
+| 216 | `← ret` | |
+| 217 | `nop` | |
+| 218 | `370: test %rbp,%rbp` | |
+| 219 | `je a70` | |
+| 220 | `call llama_get_sampled_logits_count_ith@plt` | |
+| 221 | `mov 0x240(%rbx),%rcx` | |
+| 222 | `mov %eax,%r14d` | |
+| 223 | `mov 0x238(%rbx),%rdx` | |
+| 224 | `movabs $0xaaaaaaaaaaaaaaab,%rdi` | |
+| 225 | `mov %r14,%r13` | |
+| 226 | `mov %rcx,%rax` | |
+| 227 | `sub %rdx,%rax` | |
+| 228 | `sar $0x2,%rax` | |
+| 229 | `imul %rdi,%rax` | |
+| 230 | `mov %rax,%rsi` | |
+| 231 | `cmp %r14,%rax` | |
+| 232 | `jb b20` | |
+| 233 | `cmp %rax,%r14` | |
+| 234 | `jae 3de` | |
+| 235 | `lea (%r14,%r14,2),%rax` | |
+| 236 | `shl $0x2,%rax` | |
+| 237 | `lea (%rdx,%rax,1),%r8` | |
+| 238 | `cmp %r8,%rcx` | |
+| 239 | `je 3de` | |
+| 240 | `sar $0x2,%rax` | |
+| 241 | `mov %r8,0x240(%rbx)` | |
+| 242 | `imul %rdi,%rax` | |
+| 243 | `mov %rax,%rsi` | |
+| 244 | `3de: test %r13d,%r13d` | |
+| 245 | `je 2a0` | |
+| 246 | `cmp $0x8,%r13d` | |
+| 247 | `jbe a38` | |
+| 248 | `3f1: lea 0x0(,%r14,4),%rcx` | |
+| 249 | `lea (%r14,%r14,2),%rax` | |
+| 250 | `shl $0x2,%rax` | |
+| 251 | `lea 0x0(%rbp,%rcx,1),%rdi` | |
+| 252 | `lea 0x4(%rdx),%r8` | |
+| 253 | `cmp %rdi,%r8` | |
+| 254 | `lea (%rdx,%rax,1),%r8` | |
+| 255 | `setae %dil` | |
+| 256 | `cmp %r8,%rbp` | |
+| 257 | `setae %r8b` | |
+| 258 | `or %r8b,%dil` | |
+| 259 | `je a38` | |
+| 260 | `lea -0x8(%rdx,%rax,1),%rax` | |
+| 261 | `cmp %rax,%r12` | |
+| 262 | `setae %al` | |
+| 263 | `add %r12,%rcx` | |
+| 264 | `cmp %rcx,%rdx` | |
+| 265 | `setae %cl` | |
+| 266 | `or %cl,%al` | |
+| 267 | `je a38` | |
+| 268 | `mov %r13d,%r11d` | |
+| 269 | `mov %rdx,%rax` | |
+| 270 | `xor %ecx,%ecx` | |
+| 271 | `shr $0x2,%r11d` | |
+| 272 | `shl $0x4,%r11` | |
+| 273 | `nop` | |
+| 274 | `458: lea (%r12,%rcx,1),%rdi` | |
+| 275 | `add $0x30,%rax` | |
+| 276 | `mov 0xc(%rdi),%r8d` | |
+| 277 | `mov 0x8(%rdi),%r9d` | |
+| 278 | `mov 0x4(%rdi),%r10d` | |
+| 279 | `mov (%rdi),%r14d` | |
+| 280 | `lea 0x0(%rbp,%rcx,1),%rdi` | |
+| 281 | `add $0x10,%rcx` | |
+| 282 | `movss 0x8(%rdi),%xmm1` | |
+| 283 | `movss 0x4(%rdi),%xmm2` | |
+| 284 | `movss (%rdi),%xmm3` | |
+| 285 | `movss 0xc(%rdi),%xmm0` | |
+| 286 | `mov %r14d,-0x30(%rax)` | |
+| 287 | `mov %r10d,-0x24(%rax)` | |
+| 288 | `mov %r9d,-0x18(%rax)` | |
+| 289 | `mov %r8d,-0xc(%rax)` | |
+| 290 | `movss %xmm3,-0x2c(%rax)` | |
+| 291 | `movss %xmm2,-0x20(%rax)` | |
+| 292 | `movss %xmm1,-0x14(%rax)` | |
+| 293 | `movss %xmm0,-0x8(%rax)` | |
+| 294 | `movl $0x0,-0x28(%rax)` | |
+| 295 | `movl $0x0,-0x1c(%rax)` | |
+| 296 | `movl $0x0,-0x10(%rax)` | |
+| 297 | `movl $0x0,-0x4(%rax)` | |
+| 298 | `cmp %r11,%rcx` | |
+| 299 | `jne 458` | |
+| 300 | `mov %r13d,%eax` | |
+| 301 | `and $0xfffffffc,%eax` | |
+| 302 | `test $0x3,%r13b` | |
+| 303 | `je 2a0` | |
+| 304 | `mov %eax,%ecx` | |
+| 305 | `mov (%r12,%rcx,4),%r8d` | |
+| 306 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
+| 307 | `lea (%rcx,%rcx,2),%rdi` | |
+| 308 | `lea 0x1(%rax),%ecx` | |
+| 309 | `lea (%rdx,%rdi,4),%rdi` | |
+| 310 | `mov %r8d,(%rdi)` | |
+| 311 | `movl $0x0,0x8(%rdi)` | |
+| 312 | `movss %xmm0,0x4(%rdi)` | |
+| 313 | `cmp %r13d,%ecx` | |
+| 314 | `jae 2a0` | |
+| 315 | `mov (%r12,%rcx,4),%r8d` | |
+| 316 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
+| 317 | `lea (%rcx,%rcx,2),%rdi` | |
+| 318 | `add $0x2,%eax` | |
+| 319 | `lea (%rdx,%rdi,4),%rdi` | |
+| 320 | `mov %r8d,(%rdi)` | |
+| 321 | `movl $0x0,0x8(%rdi)` | |
+| 322 | `movss %xmm0,0x4(%rdi)` | |
+| 323 | `cmp %r13d,%eax` | |
+| 324 | `jae 2a0` | |
+| 325 | `mov (%r12,%rax,4),%edi` | |
+| 326 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 327 | `lea (%rax,%rax,2),%rcx` | |
+| 328 | `lea (%rdx,%rcx,4),%rcx` | |
+| 329 | `mov %edi,(%rcx)` | |
+| 330 | `movl $0x0,0x8(%rcx)` | |
+| 331 | `movss %xmm0,0x4(%rcx)` | |
+| 332 | `jmp 2a0` | |
+| 333 | `nop` | |
+| 334 | `568: lea 0x250(%rbx),%r12` | |
+| 335 | `mov 0x1f0(%rbx),%rdi` | |
+| 336 | `mov %r12,%rsi` | |
+| 337 | `call llama_sampler_apply@plt` | |
+| 338 | `cmpb $0x0,0x14(%rsp)` | |
+| 339 | `je 5b2` | |
+| 340 | `mov 0x1e8(%rbx),%rdi` | |
+| 341 | `test %rdi,%rdi` | |
+| 342 | `je 5b2` | |
+| 343 | `mov 0x1f0(%rbx),%rax` | |
+| 344 | `test %rax,%rax` | |
+| 345 | `je 5aa` | |
+| 346 | `cmpb $0x0,0xd0(%rbx)` | |
+| 347 | `jne ba9` | |
+| 348 | `5aa: mov %r12,%rsi` | |
+| 349 | `call llama_sampler_apply@plt` | |
+| 350 | `5b2: mov 0x1f8(%rbx),%rdi` | |
+| 351 | `mov %r12,%rsi` | |
+| 352 | `call llama_sampler_apply@plt` | |
+| 353 | `mov 0x260(%rbx),%rax` | |
+| 354 | `mov 0x250(%rbx),%r8` | |
+| 355 | `cmpb $0x0,0x14(%rsp)` | |
+| 356 | `lea (%rax,%rax,2),%rax` | |
+| 357 | `lea (%r8,%rax,4),%rax` | |
+| 358 | `mov (%rax),%ebp` | |
+| 359 | `jne 338` | |
+| 360 | `mov 0x1e8(%rbx),%rdi` | |
+| 361 | `test %rdi,%rdi` | |
+| 362 | `je 338` | |
+| 363 | `mov 0x1f0(%rbx),%rax` | |
+| 364 | `test %rax,%rax` | |
+| 365 | `je 60d` | |
+| 366 | `cmpb $0x0,0xd0(%rbx)` | |
+| 367 | `jne b8c` | |
+| 368 | `60d: lea 0x24(%rsp),%rax` | |
+| 369 | `lea 0x40(%rsp),%rsi` | |
+| 370 | `mov %ebp,0x24(%rsp)` | |
+| 371 | `movq $0x3f800000,0x28(%rsp)` | |
+| 372 | `movq $0x0,0x58(%rsp)` | |
+| 373 | `movq $0x1,0x48(%rsp)` | |
+| 374 | `movq $0xffffffffffffffff,0x50(%rsp)` | |
+| 375 | `mov %rax,0x40(%rsp)` | |
+| 376 | `call llama_sampler_apply@plt` | |
+| 377 | `mov 0x40(%rsp),%rax` | |
+| 378 | `movss std::_Sp_make_shared_tag::_S_ti()::__tag+0x750,%xmm0` | |
+| 379 | `ucomiss 0x4(%rax),%xmm0` | |
+| 380 | `jbe 338` | |
+| 381 | `mov (%rsp),%r13d` | |
+| 382 | `mov %r15,%rdi` | |
+| 383 | `mov %r13d,%esi` | |
+| 384 | `call llama_get_sampled_probs_ith@plt` | |
+| 385 | `mov %r13d,%esi` | |
+| 386 | `mov %r15,%rdi` | |
+| 387 | `mov %rax,%r14` | |
+| 388 | `call llama_get_sampled_logits_ith@plt` | |
+| 389 | `mov %r13d,%esi` | |
+| 390 | `mov %r15,%rdi` | |
+| 391 | `mov %r13d,(%rsp)` | |
+| 392 | `mov %rax,%rbp` | |
+| 393 | `call llama_get_sampled_candidates_ith@plt` | |
+| 394 | `mov %r15,%rdi` | |
+| 395 | `mov %rax,%r13` | |
+| 396 | `call llama_get_model@plt` | |
+| 397 | `mov %rax,%rdi` | |
+| 398 | `call llama_model_get_vocab@plt` | |
+| 399 | `mov %rax,%rdi` | |
+| 400 | `call llama_vocab_n_tokens@plt` | |
+| 401 | `mov %eax,0x14(%rsp)` | |
+| 402 | `mov (%rsp),%esi` | |
+| 403 | `mov %r15,%rdi` | |
+| 404 | `test %r14,%r14` | |
+| 405 | `je bd0` | |
+| 406 | `call llama_get_sampled_probs_count_ith@plt` | |
+| 407 | `mov 0x240(%rbx),%rdi` | |
+| 408 | `mov %eax,%r10d` | |
+| 409 | `mov 0x238(%rbx),%rdx` | |
+| 410 | `movabs $0xaaaaaaaaaaaaaaab,%rsi` | |
+| 411 | `mov %r10,(%rsp)` | |
+| 412 | `mov %r10,%r15` | |
+| 413 | `mov %rdi,%rax` | |
+| 414 | `sub %rdx,%rax` | |
+| 415 | `sar $0x2,%rax` | |
+| 416 | `imul %rsi,%rax` | |
+| 417 | `mov %rax,%rcx` | |
+| 418 | `cmp %r10,%rax` | |
+| 419 | `jb dfd` | |
+| 420 | `cmp %rcx,%r10` | |
+| 421 | `jae 726` | |
+| 422 | `lea (%r10,%r10,2),%rax` | |
+| 423 | `shl $0x2,%rax` | |
+| 424 | `lea (%rdx,%rax,1),%r8` | |
+| 425 | `cmp %r8,%rdi` | |
+| 426 | `je 726` | |
+| 427 | `sar $0x2,%rax` | |
+| 428 | `mov %r8,0x240(%rbx)` | |
+| 429 | `imul %rsi,%rax` | |
+| 430 | `mov %rax,%rcx` | |
+| 431 | `726: test %r15d,%r15d` | |
+| 432 | `je 8c6` | |
+| 433 | `72f: cmp $0x4,%r15d` | |
+| 434 | `jbe dc2` | |
+| 435 | `mov (%rsp),%rdi` | |
+| 436 | `lea 0x4(%rdx),%rsi` | |
+| 437 | `lea 0x0(,%rdi,4),%rax` | |
+| 438 | `lea (%rdi,%rdi,2),%rdi` | |
+| 439 | `shl $0x2,%rdi` | |
+| 440 | `lea 0x0(%rbp,%rax,1),%r8` | |
+| 441 | `lea (%rdx,%rdi,1),%r9` | |
+| 442 | `cmp %r8,%rsi` | |
+| 443 | `setae %r8b` | |
+| 444 | `cmp %r9,%rbp` | |
+| 445 | `setae %r10b` | |
+| 446 | `or %r10d,%r8d` | |
+| 447 | `lea (%r14,%rax,1),%r10` | |
+| 448 | `cmp %r10,%rsi` | |
+| 449 | `setae %sil` | |
+| 450 | `cmp %r9,%r14` | |
+| 451 | `setae %r9b` | |
+| 452 | `or %r9d,%esi` | |
+| 453 | `test %sil,%r8b` | |
+| 454 | `je dc2` | |
+| 455 | `lea -0x8(%rdx,%rdi,1),%rsi` | |
+| 456 | `cmp %rsi,%r13` | |
+| 457 | `setae %sil` | |
+| 458 | `add %r13,%rax` | |
+| 459 | `cmp %rax,%rdx` | |
+| 460 | `setae %al` | |
+| 461 | `or %al,%sil` | |
+| 462 | `je dc2` | |
+| 463 | `mov %r15d,%esi` | |
+| 464 | `mov %rdx,(%rsp)` | |
+| 465 | `mov %rdx,%rax` | |
+| 466 | `shr $0x2,%esi` | |
+| 467 | `shl $0x4,%rsi` | |
+| 468 | `mov %rsi,%rdi` | |
+| 469 | `xor %esi,%esi` | |
+| 470 | `mov %rdi,%rdx` | |
+| 471 | `7c0: lea 0x0(%r13,%rsi,1),%rdi` | |
+| 472 | `add $0x30,%rax` | |
+| 473 | `mov 0xc(%rdi),%r8d` | |
+| 474 | `mov 0x8(%rdi),%r9d` | |
+| 475 | `mov 0x4(%rdi),%r10d` | |
+| 476 | `mov (%rdi),%r11d` | |
+| 477 | `lea 0x0(%rbp,%rsi,1),%rdi` | |
+| 478 | `movss 0xc(%rdi),%xmm0` | |
+| 479 | `movss 0x8(%rdi),%xmm1` | |
+| 480 | `movss 0x4(%rdi),%xmm2` | |
+| 481 | `movss (%rdi),%xmm3` | |
+| 482 | `lea (%r14,%rsi,1),%rdi` | |
+| 483 | `add $0x10,%rsi` | |
+| 484 | `movss 0xc(%rdi),%xmm4` | |
+| 485 | `movss 0x8(%rdi),%xmm5` | |
+| 486 | `movss 0x4(%rdi),%xmm6` | |
+| 487 | `movss (%rdi),%xmm7` | |
+| 488 | `mov %r11d,-0x30(%rax)` | |
+| 489 | `unpcklps %xmm5,%xmm1` | |
+| 490 | `unpcklps %xmm4,%xmm0` | |
+| 491 | `mov %r10d,-0x24(%rax)` | |
+| 492 | `unpcklps %xmm7,%xmm3` | |
+| 493 | `unpcklps %xmm6,%xmm2` | |
+| 494 | `mov %r9d,-0x18(%rax)` | |
+| 495 | `mov %r8d,-0xc(%rax)` | |
+| 496 | `movlps %xmm3,-0x2c(%rax)` | |
+| 497 | `movlps %xmm2,-0x20(%rax)` | |
+| 498 | `movlps %xmm1,-0x14(%rax)` | |
+| 499 | `movlps %xmm0,-0x8(%rax)` | |
+| 500 | `cmp %rsi,%rdx` | |
+| 501 | `jne 7c0` | |
+| 502 | `mov %r15d,%eax` | |
+| 503 | `mov (%rsp),%rdx` | |
+| 504 | `and $0xfffffffc,%eax` | |
+| 505 | `test $0x3,%r15b` | |
+| 506 | `je 8c6` | |
+| 507 | `mov %eax,%esi` | |
+| 508 | `movss (%r14,%rsi,4),%xmm1` | |
+| 509 | `movss 0x0(%rbp,%rsi,4),%xmm0` | |
+| 510 | `lea (%rsi,%rsi,2),%rdi` | |
+| 511 | `mov 0x0(%r13,%rsi,4),%r8d` | |
+| 512 | `lea (%rdx,%rdi,4),%rdi` | |
+| 513 | `lea 0x1(%rax),%esi` | |
+| 514 | `unpcklps %xmm1,%xmm0` | |
+| 515 | `mov %r8d,(%rdi)` | |
+| 516 | `movlps %xmm0,0x4(%rdi)` | |
+| 517 | `cmp %r15d,%esi` | |
+| 518 | `jae 8c6` | |
+| 519 | `movss (%r14,%rsi,4),%xmm1` | |
+| 520 | `mov 0x0(%r13,%rsi,4),%r8d` | |
+| 521 | `lea (%rsi,%rsi,2),%rdi` | |
+| 522 | `add $0x2,%eax` | |
+| 523 | `movss 0x0(%rbp,%rsi,4),%xmm0` | |
+| 524 | `lea (%rdx,%rdi,4),%rdi` | |
+| 525 | `mov %r8d,(%rdi)` | |
+| 526 | `unpcklps %xmm1,%xmm0` | |
+| 527 | `movlps %xmm0,0x4(%rdi)` | |
+| 528 | `cmp %r15d,%eax` | |
+| 529 | `jae 8c6` | |
+| 530 | `mov 0x0(%r13,%rax,4),%edi` | |
+| 531 | `lea (%rax,%rax,2),%rsi` | |
+| 532 | `movss (%r14,%rax,4),%xmm1` | |
+| 533 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 534 | `lea (%rdx,%rsi,4),%rsi` | |
+| 535 | `mov %edi,(%rsi)` | |
+| 536 | `unpcklps %xmm1,%xmm0` | |
+| 537 | `movlps %xmm0,0x4(%rsi)` | |
+| 538 | `8c6: mov %rdx,0x250(%rbx)` | |
+| 539 | `mov 0x1f0(%rbx),%rdi` | |
+| 540 | `mov %r12,%rsi` | |
+| 541 | `mov %rcx,0x258(%rbx)` | |
+| 542 | `movq $0xffffffffffffffff,0x260(%rbx)` | |
+| 543 | `movb $0x0,0x268(%rbx)` | |
+| 544 | `call llama_sampler_apply@plt` | |
+| 545 | `mov 0x1e8(%rbx),%rdi` | |
+| 546 | `test %rdi,%rdi` | |
+| 547 | `je 922` | |
+| 548 | `mov 0x1f0(%rbx),%rax` | |
+| 549 | `test %rax,%rax` | |
+| 550 | `je 91a` | |
+| 551 | `cmpb $0x0,0xd0(%rbx)` | |
+| 552 | `jne e68` | |
+| 553 | `91a: mov %r12,%rsi` | |
+| 554 | `call llama_sampler_apply@plt` | |
+| 555 | `922: mov 0x1f8(%rbx),%rdi` | |
+| 556 | `mov %r12,%rsi` | |
+| 557 | `call llama_sampler_apply@plt` | |
+| 558 | `mov 0x260(%rbx),%rax` | |
+| 559 | `cmp $0xffffffffffffffff,%rax` | |
+| 560 | `je fc7` | |
+| 561 | `mov 0x250(%rbx),%rdx` | |
+| 562 | `lea (%rax,%rax,2),%rax` | |
+| 563 | `lea (%rdx,%rax,4),%rax` | |
+| 564 | `mov (%rax),%ebp` | |
+| 565 | `jmp 338` | |
+| 566 | `nop` | |
+| 567 | `960: mov %rdx,%rcx` | |
+| 568 | `xor %eax,%eax` | |
+| 569 | `nop` | |
+| 570 | `968: movss 0x0(%r13,%rax,4),%xmm1` | |
+| 571 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 572 | `add $0xc,%rcx` | |
+| 573 | `mov (%r12,%rax,4),%edi` | |
+| 574 | `add $0x1,%rax` | |
+| 575 | `unpcklps %xmm1,%xmm0` | |
+| 576 | `mov %edi,-0xc(%rcx)` | |
+| 577 | `movlps %xmm0,-0x8(%rcx)` | |
+| 578 | `cmp %r14d,%eax` | |
+| 579 | `jb 968` | |
+| 580 | `jmp 2a0` | |
+| 581 | `nop` | |
+| 582 | `998: call common_log_main()@plt` | |
+| 583 | `mov %rax,%rdi` | |
+| 584 | `mov %ebp,%r8d` | |
+| 585 | `xor %eax,%eax` | |
+| 586 | `mov $0x1,%esi` | |
+| 587 | `lea _fini+0x6e68,%rcx` | |
+| 588 | `lea _fini+0x192d0,%rdx` | |
+| 589 | `call common_log_add(common_log*, ggml_log_level, char const*, ...)@plt` | |
+| 590 | `jmp 2e4` | |
+| 591 | `nop` | |
+| 592 | `9c8: lea (%r11,%r11,2),%rax` | |
+| 593 | `shl $0x2,%rax` | |
+| 594 | `lea (%rdx,%rax,1),%r8` | |
+| 595 | `cmp %r8,%rcx` | |
+| 596 | `je f7` | |
+| 597 | `sar $0x2,%rax` | |
+| 598 | `mov %r8,0x240(%rbx)` | |
+| 599 | `imul %rdi,%rax` | |
+| 600 | `mov %rax,%rsi` | |
+| 601 | `jmp f7` | |
+| 602 | `nop` | |
+| 603 | `9f8: mov %r11,%rsi` | |
+| 604 | `lea 0x238(%rbx),%rdi` | |
+| 605 | `sub %rax,%rsi` | |
+| 606 | `call std::vector<llama_token_data, std::allocator<llama_token_data> >::_M_default_append(unsigned` | |
+| 607 | `mov 0x238(%rbx),%rdx` | |
+| 608 | `mov 0x240(%rbx),%rax` | |
+| 609 | `movabs $0xaaaaaaaaaaaaaaab,%rcx` | |
+| 610 | `sub %rdx,%rax` | |
+| 611 | `sar $0x2,%rax` | |
+| 612 | `imul %rcx,%rax` | |
+| 613 | `mov %rax,%rsi` | |
+| 614 | `jmp 100` | |
+| 615 | `nop` | |
+| 616 | `a38: mov %rdx,%rcx` | |
+| 617 | `xor %eax,%eax` | |
+| 618 | `nop` | |
+| 619 | `a40: mov (%r12,%rax,4),%edi` | |
+| 620 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 621 | `add $0x1,%rax` | |
+| 622 | `movl $0x0,0x8(%rcx)` | |
+| 623 | `add $0xc,%rcx` | |
+| 624 | `mov %edi,-0xc(%rcx)` | |
+| 625 | `movss %xmm0,-0x8(%rcx)` | |
+| 626 | `cmp %r13d,%eax` | |
+| 627 | `jb a40` | |
+| 628 | `jmp 2a0` | |
+| 629 | `nop` | |
+| 630 | `a70: call llama_get_logits_ith@plt` | |
+| 631 | `mov %rax,%rbp` | |
+| 632 | `test %rax,%rax` | |
+| 633 | `je f96` | |
+| 634 | `mov 0x240(%rbx),%rsi` | |
+| 635 | `mov 0x238(%rbx),%rdx` | |
+| 636 | `movslq %r14d,%r12` | |
+| 637 | `movabs $0xaaaaaaaaaaaaaaab,%rcx` | |
+| 638 | `mov %rsi,%rax` | |
+| 639 | `sub %rdx,%rax` | |
+| 640 | `sar $0x2,%rax` | |
+| 641 | `imul %rcx,%rax` | |
+| 642 | `cmp %r12,%rax` | |
+| 643 | `jb b67` | |
+| 644 | `cmp %rax,%r12` | |
+| 645 | `jae acf` | |
+| 646 | `lea (%r12,%r12,2),%rax` | |
+| 647 | `lea (%rdx,%rax,4),%rax` | |
+| 648 | `cmp %rax,%rsi` | |
+| 649 | `je acc` | |
+| 650 | `mov %rax,0x240(%rbx)` | |
+| 651 | `acc: mov %rax,%rsi` | |
+| 652 | `acf: mov %rdx,%rcx` | |
+| 653 | `xor %eax,%eax` | |
+| 654 | `test %r14d,%r14d` | |
+| 655 | `jle b01` | |
+| 656 | `nop` | |
+| 657 | `ae0: movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 658 | `mov %eax,(%rcx)` | |
+| 659 | `add $0x1,%rax` | |
+| 660 | `add $0xc,%rcx` | |
+| 661 | `movl $0x0,-0x4(%rcx)` | |
+| 662 | `movss %xmm0,-0x8(%rcx)` | |
+| 663 | `cmp %rax,%r12` | |
+| 664 | `jne ae0` | |
+| 665 | `b01: movabs $0xaaaaaaaaaaaaaaab,%rax` | |
+| 666 | `sub %rdx,%rsi` | |
+| 667 | `sar $0x2,%rsi` | |
+| 668 | `imul %rax,%rsi` | |
+| 669 | `jmp 2a0` | |
+| 670 | `nop` | |
+| 671 | `b20: mov %r14,%rsi` | |
+| 672 | `lea 0x238(%rbx),%rdi` | |
+| 673 | `sub %rax,%rsi` | |
+| 674 | `call std::vector<llama_token_data, std::allocator<llama_token_data> >::_M_default_append(unsigned` | |
+| 675 | `mov 0x238(%rbx),%rdx` | |
+| 676 | `mov 0x240(%rbx),%rax` | |
+| 677 | `movabs $0xaaaaaaaaaaaaaaab,%rcx` | |
+| 678 | `sub %rdx,%rax` | |
+| 679 | `sar $0x2,%rax` | |
+| 680 | `imul %rcx,%rax` | |
+| 681 | `mov %rax,%rsi` | |
+| 682 | `cmp $0x8,%r13d` | |
+| 683 | `ja 3f1` | |
+| 684 | `jmp a38` | |
+| 685 | `b67: mov %r12,%rsi` | |
+| 686 | `lea 0x238(%rbx),%rdi` | |
+| 687 | `sub %rax,%rsi` | |
+| 688 | `call std::vector<llama_token_data, std::allocator<llama_token_data> >::_M_default_append(unsigned` | |
+| 689 | `mov 0x238(%rbx),%rdx` | |
+| 690 | `mov 0x240(%rbx),%rsi` | |
+| 691 | `jmp acf` | |
+| 692 | `b8c: mov %rax,%rdi` | |
+| 693 | `call common_reasoning_budget_get_state(llama_sampler const*)@plt` | |
+| 694 | `and $0xfffffffb,%eax` | |
+| 695 | `jne 338` | |
+| 696 | `mov 0x1e8(%rbx),%rdi` | |
+| 697 | `jmp 60d` | |
+| 698 | `ba9: mov %rax,%rdi` | |
+| 699 | `call common_reasoning_budget_get_state(llama_sampler const*)@plt` | |
+| 700 | `and $0xfffffffb,%eax` | |
+| 701 | `jne 5b2` | |
+| 702 | `mov 0x1e8(%rbx),%rdi` | |
+| 703 | `jmp 5aa` | |
+| 704 | `cs nopw 0x0(%rax,%rax,1)` | |
+| 705 | `bd0: test %rbp,%rbp` | |
+| 706 | `je e85` | |
+| 707 | `call llama_get_sampled_logits_count_ith@plt` | |
+| 708 | `mov 0x240(%rbx),%rdi` | |
+| 709 | `mov %eax,%r14d` | |
+| 710 | `mov 0x238(%rbx),%rdx` | |
+| 711 | `movabs $0xaaaaaaaaaaaaaaab,%rsi` | |
+| 712 | `mov %r14,%r15` | |
+| 713 | `mov %rdi,%rax` | |
+| 714 | `sub %rdx,%rax` | |
+| 715 | `sar $0x2,%rax` | |
+| 716 | `imul %rsi,%rax` | |
+| 717 | `mov %rax,%rcx` | |
+| 718 | `cmp %r14,%rax` | |
+| 719 | `jb f32` | |
+| 720 | `cmp %rax,%r14` | |
+| 721 | `jae c3e` | |
+| 722 | `lea (%r14,%r14,2),%rax` | |
+| 723 | `shl $0x2,%rax` | |
+| 724 | `lea (%rdx,%rax,1),%r8` | |
+| 725 | `cmp %r8,%rdi` | |
+| 726 | `je c3e` | |
+| 727 | `sar $0x2,%rax` | |
+| 728 | `mov %r8,0x240(%rbx)` | |
+| 729 | `imul %rsi,%rax` | |
+| 730 | `mov %rax,%rcx` | |
+| 731 | `c3e: test %r15d,%r15d` | |
+| 732 | `je 8c6` | |
+| 733 | `c47: cmp $0x8,%r15d` | |
+| 734 | `jbe e37` | |
+| 735 | `lea 0x0(,%r14,4),%rax` | |
+| 736 | `lea (%r14,%r14,2),%rsi` | |
+| 737 | `shl $0x2,%rsi` | |
+| 738 | `lea 0x4(%rdx),%r8` | |
+| 739 | `lea 0x0(%rbp,%rax,1),%rdi` | |
+| 740 | `cmp %rdi,%r8` | |
+| 741 | `lea (%rdx,%rsi,1),%r8` | |
+| 742 | `setae %dil` | |
+| 743 | `cmp %r8,%rbp` | |
+| 744 | `setae %r8b` | |
+| 745 | `or %r8b,%dil` | |
+| 746 | `je e37` | |
+| 747 | `lea -0x8(%rdx,%rsi,1),%rsi` | |
+| 748 | `cmp %rsi,%r13` | |
+| 749 | `setae %sil` | |
+| 750 | `add %r13,%rax` | |
+| 751 | `cmp %rax,%rdx` | |
+| 752 | `setae %al` | |
+| 753 | `or %al,%sil` | |
+| 754 | `je e37` | |
+| 755 | `mov %r15d,%esi` | |
+| 756 | `mov %rdx,%rax` | |
+| 757 | `shr $0x2,%esi` | |
+| 758 | `shl $0x4,%rsi` | |
+| 759 | `mov %rsi,%r14` | |
+| 760 | `xor %esi,%esi` | |
+| 761 | `cb5: lea 0x0(%r13,%rsi,1),%rdi` | |
+| 762 | `add $0x30,%rax` | |
+| 763 | `mov 0xc(%rdi),%r8d` | |
+| 764 | `mov 0x8(%rdi),%r9d` | |
+| 765 | `mov 0x4(%rdi),%r10d` | |
+| 766 | `mov (%rdi),%r11d` | |
+| 767 | `lea 0x0(%rbp,%rsi,1),%rdi` | |
+| 768 | `add $0x10,%rsi` | |
+| 769 | `movss 0x8(%rdi),%xmm1` | |
+| 770 | `movss 0x4(%rdi),%xmm2` | |
+| 771 | `movss (%rdi),%xmm3` | |
+| 772 | `movss 0xc(%rdi),%xmm0` | |
+| 773 | `mov %r11d,-0x30(%rax)` | |
+| 774 | `mov %r10d,-0x24(%rax)` | |
+| 775 | `mov %r9d,-0x18(%rax)` | |
+| 776 | `mov %r8d,-0xc(%rax)` | |
+| 777 | `movss %xmm3,-0x2c(%rax)` | |
+| 778 | `movss %xmm2,-0x20(%rax)` | |
+| 779 | `movss %xmm1,-0x14(%rax)` | |
+| 780 | `movss %xmm0,-0x8(%rax)` | |
+| 781 | `movl $0x0,-0x28(%rax)` | |
+| 782 | `movl $0x0,-0x1c(%rax)` | |
+| 783 | `movl $0x0,-0x10(%rax)` | |
+| 784 | `movl $0x0,-0x4(%rax)` | |
+| 785 | `cmp %rsi,%r14` | |
+| 786 | `jne cb5` | |
+| 787 | `mov %r15d,%eax` | |
+| 788 | `and $0xfffffffc,%eax` | |
+| 789 | `test $0x3,%r15b` | |
+| 790 | `je 8c6` | |
+| 791 | `mov %eax,%esi` | |
+| 792 | `mov 0x0(%r13,%rsi,4),%r8d` | |
+| 793 | `movss 0x0(%rbp,%rsi,4),%xmm0` | |
+| 794 | `lea (%rsi,%rsi,2),%rdi` | |
+| 795 | `lea 0x1(%rax),%esi` | |
+| 796 | `lea (%rdx,%rdi,4),%rdi` | |
+| 797 | `mov %r8d,(%rdi)` | |
+| 798 | `movl $0x0,0x8(%rdi)` | |
+| 799 | `movss %xmm0,0x4(%rdi)` | |
+| 800 | `cmp %r15d,%esi` | |
+| 801 | `jae 8c6` | |
+| 802 | `mov 0x0(%r13,%rsi,4),%r8d` | |
+| 803 | `movss 0x0(%rbp,%rsi,4),%xmm0` | |
+| 804 | `lea (%rsi,%rsi,2),%rdi` | |
+| 805 | `add $0x2,%eax` | |
+| 806 | `lea (%rdx,%rdi,4),%rdi` | |
+| 807 | `mov %r8d,(%rdi)` | |
+| 808 | `movl $0x0,0x8(%rdi)` | |
+| 809 | `movss %xmm0,0x4(%rdi)` | |
+| 810 | `cmp %r15d,%eax` | |
+| 811 | `jae 8c6` | |
+| 812 | `mov 0x0(%r13,%rax,4),%edi` | |
+| 813 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 814 | `lea (%rax,%rax,2),%rsi` | |
+| 815 | `lea (%rdx,%rsi,4),%rsi` | |
+| 816 | `mov %edi,(%rsi)` | |
+| 817 | `movl $0x0,0x8(%rsi)` | |
+| 818 | `movss %xmm0,0x4(%rsi)` | |
+| 819 | `jmp 8c6` | |
+| 820 | `dc2: mov %rdx,%rsi` | |
+| 821 | `xor %eax,%eax` | |
+| 822 | `nop` | |
+| 823 | `dd0: movss (%r14,%rax,4),%xmm1` | |
+| 824 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 825 | `add $0xc,%rsi` | |
+| 826 | `mov 0x0(%r13,%rax,4),%edi` | |
+| 827 | `add $0x1,%rax` | |
+| 828 | `unpcklps %xmm1,%xmm0` | |
+| 829 | `mov %edi,-0xc(%rsi)` | |
+| 830 | `movlps %xmm0,-0x8(%rsi)` | |
+| 831 | `cmp %r15d,%eax` | |
+| 832 | `jb dd0` | |
+| 833 | `jmp 8c6` | |
+| 834 | `dfd: mov %r10,%rsi` | |
+| 835 | `lea 0x238(%rbx),%rdi` | |
+| 836 | `sub %rax,%rsi` | |
+| 837 | `call std::vector<llama_token_data, std::allocator<llama_token_data> >::_M_default_append(unsigned` | |
+| 838 | `mov 0x238(%rbx),%rdx` | |
+| 839 | `mov 0x240(%rbx),%rcx` | |
+| 840 | `movabs $0xaaaaaaaaaaaaaaab,%rax` | |
+| 841 | `sub %rdx,%rcx` | |
+| 842 | `sar $0x2,%rcx` | |
+| 843 | `imul %rax,%rcx` | |
+| 844 | `jmp 72f` | |
+| 845 | `e37: mov %rdx,%rsi` | |
+| 846 | `xor %eax,%eax` | |
+| 847 | `e3c: mov 0x0(%r13,%rax,4),%edi` | |
+| 848 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
+| 849 | `add $0x1,%rax` | |
+| 850 | `movl $0x0,0x8(%rsi)` | |
+| 851 | `add $0xc,%rsi` | |
+| 852 | `mov %edi,-0xc(%rsi)` | |
+| 853 | `movss %xmm0,-0x8(%rsi)` | |
+| 854 | `cmp %r15d,%eax` | |
+| 855 | `jb e3c` | |
+| 856 | `jmp 8c6` | |
+| 857 | `e68: mov %rax,%rdi` | |
+| 858 | `call common_reasoning_budget_get_state(llama_sampler const*)@plt` | |
+| 859 | `and $0xfffffffb,%eax` | |
+| 860 | `jne 922` | |
+| 861 | `mov 0x1e8(%rbx),%rdi` | |
+| 862 | `jmp 91a` | |
+| 863 | `e85: call llama_get_logits_ith@plt` | |
+| 864 | `mov %rax,%r14` | |
+| 865 | `test %rax,%rax` | |
+| 866 | `je ff8` | |
+| 867 | `mov 0x240(%rbx),%rsi` | |
+| 868 | `mov 0x238(%rbx),%rdx` | |
+| 869 | `movabs $0xaaaaaaaaaaaaaaab,%rcx` | |
+| 870 | `movslq 0x14(%rsp),%r13` | |
+| 871 | `mov %rsi,%rax` | |
+| 872 | `sub %rdx,%rax` | |
+| 873 | `sar $0x2,%rax` | |
+| 874 | `imul %rcx,%rax` | |
+| 875 | `cmp %r13,%rax` | |
+| 876 | `jb f6c` | |
+| 877 | `cmp %rax,%r13` | |
+| 878 | `jae ee7` | |
+| 879 | `lea 0x0(%r13,%r13,2),%rax` | |
+| 880 | `lea (%rdx,%rax,4),%rax` | |
+| 881 | `cmp %rax,%rsi` | |
+| 882 | `je ee4` | |
+| 883 | `mov %rax,0x240(%rbx)` | |
+| 884 | `ee4: mov %rax,%rsi` | |
+| 885 | `ee7: mov 0x14(%rsp),%edi` | |
+| 886 | `mov %rdx,%rcx` | |
+| 887 | `xor %eax,%eax` | |
+| 888 | `test %edi,%edi` | |
+| 889 | `jle f15` | |
+| 890 | `ef4: movss (%r14,%rax,4),%xmm0` | |
+| 891 | `mov %eax,(%rcx)` | |
+| 892 | `add $0x1,%rax` | |
+| 893 | `add $0xc,%rcx` | |
+| 894 | `movl $0x0,-0x4(%rcx)` | |
+| 895 | `movss %xmm0,-0x8(%rcx)` | |
+| 896 | `cmp %rax,%r13` | |
+| 897 | `jne ef4` | |
+| 898 | `f15: movabs $0xaaaaaaaaaaaaaaab,%rax` | |
+| 899 | `sub %rdx,%rsi` | |
+| 900 | `mov %rsi,%rcx` | |
+| 901 | `sar $0x2,%rcx` | |
+| 902 | `imul %rax,%rcx` | |
+| 903 | `jmp 8c6` | |
+| 904 | `f32: mov %r14,%rsi` | |
+| 905 | `lea 0x238(%rbx),%rdi` | |
+| 906 | `sub %rax,%rsi` | |
+| 907 | `call std::vector<llama_token_data, std::allocator<llama_token_data> >::_M_default_append(unsigned` | |
+| 908 | `mov 0x238(%rbx),%rdx` | |
+| 909 | `mov 0x240(%rbx),%rcx` | |
+| 910 | `movabs $0xaaaaaaaaaaaaaaab,%rax` | |
+| 911 | `sub %rdx,%rcx` | |
+| 912 | `sar $0x2,%rcx` | |
+| 913 | `imul %rax,%rcx` | |
+| 914 | `jmp c47` | |
+| 915 | `f6c: mov %r13,%rsi` | |
+| 916 | `lea 0x238(%rbx),%rdi` | |
+| 917 | `sub %rax,%rsi` | |
+| 918 | `call std::vector<llama_token_data, std::allocator<llama_token_data> >::_M_default_append(unsigned` | |
+| 919 | `mov 0x238(%rbx),%rdx` | |
+| 920 | `mov 0x240(%rbx),%rsi` | |
+| 921 | `jmp ee7` | |
+| 922 | `f91: call __stack_chk_fail@plt` | |
+| 923 | `f96: mov 0x68(%rsp),%rax` | |
+| 924 | `sub %fs:0x28,%rax` | |
+| 925 | `jne f91` | |
+| 926 | `lea _fini+0x6e56,%rcx` | |
+| 927 | `lea _fini+0x14d1,%rdx` | |
+| 928 | `mov $0x9a,%esi` | |
+| 929 | `xor %eax,%eax` | |
+| 930 | `lea _fini+0x19290,%rdi` | |
+| 931 | `call ggml_abort@plt` | |
+| 932 | `fc7: mov 0x68(%rsp),%rax` | |
+| 933 | `sub %fs:0x28,%rax` | |
+| 934 | `jne f91` | |
+| 935 | `lea _fini+0x193e0,%rcx` | |
+| 936 | `lea _fini+0x14d1,%rdx` | |
+| 937 | `mov $0x29f,%esi` | |
+| 938 | `xor %eax,%eax` | |
+| 939 | `lea _fini+0x19290,%rdi` | |
+| 940 | `call ggml_abort@plt` | |
+| 941 | `ff8: mov 0x68(%rsp),%rax` | |
+| 942 | `sub %fs:0x28,%rax` | |
+| 943 | `jne f91` | |
+| 944 | `\| lea _fini+0x6e56,%rcx` | |
+| 945 | `lea _fini+0x14d1,%rdx` | |
+| 946 | `mov $0x9a,%esi` | |
+| 947 | `xor %eax,%eax` | |
+| 948 | `lea _fini+0x19290,%rdi` | |
+| 949 | `call ggml_abort@plt` | |
+| 950 | `1029: mov 0x68(%rsp),%rax` | |
+| 951 | `sub %fs:0x28,%rax` | |
+| 952 | `jne f91` | |
+| 953 | `lea _fini+0x19378,%rcx` | |
+| 954 | `lea _fini+0x14d1,%rdx` | |
+| 955 | `mov $0x26a,%esi` | |
+| 956 | `xor %eax,%eax` | |
+| 957 | `lea _fini+0x19290,%rdi` | |
+| 958 | `call ggml_abort@plt` | |
+| 959 | `105e: mov 0x68(%rsp),%rax` | |
+| 960 | `sub %fs:0x28,%rax` | |
+| 961 | `jne f91` | |
+| 962 | `lea _fini+0x19320,%rcx` | |
+| 963 | `lea _fini+0x14d1,%rdx` | |
+| 964 | `mov $0x269,%esi` | |
+| 965 | `xor %eax,%eax` | |
+| 966 | `lea _fini+0x19290,%rdi` | |
+| 967 | `call ggml_abort@plt` | |
+| 968 | `endbr64 \` | |
+| 969 | `mov %rax,%rbx` | |
+| 970 | `\| jmp e9e0a <common_sampler_sample(common_sampler*, llama_context*, int, bool) [clone .cold]>` | |
+
+## Notes
+
+- `perf annotate` decorations such as `→`, `↓`, `↑`, `▒`, and `◆` were removed.
+- Sampling percentages were removed from the assembly listing.
+- Labels such as `198:`, `2a0:`, `ae0:`, etc. are preserved because they identify jump/loop targets.
+- The assembly syntax is kept in the AT&T format produced by `perf`.
+
+        
+        
