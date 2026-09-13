@@ -7,106 +7,106 @@ The profiling percentages, navigation arrows, and TUI decorations have been remo
 
 | # | Assembly instruction | Explanation |
 |---:|---|---|
-| 1 | `push %r15` | |
-| 2 | `mov %rsi,%r15` | |
-| 3 | `push %r14` | |
-| 4 | `mov %edx,%r14d` | |
-| 5 | `push %r13` | |
-| 6 | `push %r12` | |
-| 7 | `push %rbp` | |
-| 8 | `push %rbx` | |
-| 9 | `mov %rdi,%rbx` | |
-| 10 | `mov %rsi,%rdi` | |
-| 11 | `sub $0x78,%rsp` | |
-| 12 | `mov %ecx,0x14(%rsp)` | |
-| 13 | `mov %fs:0x28,%rax` | |
-| 14 | `mov %rax,0x68(%rsp)` | |
-| 15 | `xor %eax,%eax` | |
-| 16 | `call llama_synchronize@plt` | |
-| 17 | `lea 0x30(%rsp),%rax` | |
-| 18 | `movzbl 0x6d(%rbx),%edx` | |
-| 19 | `lea 0x270(%rbx),%rsi` | |
-| 20 | `mov %rax,%rdi` | |
-| 21 | `mov %rax,0x8(%rsp)` | |
-| 22 | `call common_time_meas::common_time_meas(long&, bool)@plt` | |
-| 23 | `mov %r14d,%esi` | |
-| 24 | `mov %r15,%rdi` | |
-| 25 | `call llama_get_sampled_probs_ith@plt` | |
-| 26 | `mov %r14d,%esi` | |
-| 27 | `mov %r15,%rdi` | |
-| 28 | `mov %rax,%r13` | |
-| 29 | `call llama_get_sampled_logits_ith@plt` | |
-| 30 | `mov %r14d,%esi` | |
-| 31 | `mov %r15,%rdi` | |
-| 32 | `mov %r14d,(%rsp)` | |
-| 33 | `mov %rax,%rbp` | |
-| 34 | `call llama_get_sampled_candidates_ith@plt` | |
-| 35 | `mov %r15,%rdi` | |
-| 36 | `mov %rax,%r12` | |
-| 37 | `call llama_get_model@plt` | |
-| 38 | `mov %rax,%rdi` | |
-| 39 | `call llama_model_get_vocab@plt` | |
-| 40 | `mov %rax,%rdi` | |
-| 41 | `call llama_vocab_n_tokens@plt` | |
-| 42 | `mov (%rsp),%esi` | |
-| 43 | `mov %eax,%r14d` | |
-| 44 | `mov %r15,%rdi` | |
-| 45 | `test %r13,%r13` | |
-| 46 | `je 370` | |
-| 47 | `call llama_get_sampled_probs_count_ith@plt` | |
-| 48 | `mov 0x240(%rbx),%rcx` | |
-| 49 | `mov %eax,%r11d` | |
-| 50 | `mov 0x238(%rbx),%rdx` | |
-| 51 | `movabs $0xaaaaaaaaaaaaaaab,%rdi` | |
-| 52 | `mov %r11,0x18(%rsp)` | |
-| 53 | `mov %r11,%r14` | |
-| 54 | `mov %rcx,%rax` | |
-| 55 | `sub %rdx,%rax` | |
-| 56 | `sar $0x2,%rax` | |
-| 57 | `imul %rdi,%rax` | |
-| 58 | `mov %rax,%rsi` | |
-| 59 | `cmp %r11,%rax` | |
-| 60 | `jb 9f8` | |
-| 61 | `cmp %rsi,%r11` | |
-| 62 | `jb 9c8` | |
-| 63 | `f7: test %r14d,%r14d` | |
-| 64 | `je 2a0` | |
-| 65 | `100: cmp $0x4,%r14d` | |
-| 66 | `jbe 960` | |
-| 67 | `mov 0x18(%rsp),%rcx` | |
-| 68 | `lea 0x4(%rdx),%rdi` | |
-| 69 | `lea 0x0(,%rcx,4),%rax` | |
-| 70 | `lea (%rcx,%rcx,2),%rcx` | |
-| 71 | `shl $0x2,%rcx` | |
-| 72 | `lea 0x0(%r13,%rax,1),%r8` | |
-| 73 | `lea (%rdx,%rcx,1),%r9` | |
-| 74 | `cmp %r8,%rdi` | |
-| 75 | `setae %r8b` | |
-| 76 | `cmp %r9,%r13` | |
-| 77 | `setae %r10b` | |
-| 78 | `or %r10d,%r8d` | |
-| 79 | `lea 0x0(%rbp,%rax,1),%r10` | |
-| 80 | `cmp %r10,%rdi` | |
-| 81 | `setae %dil` | |
-| 82 | `cmp %r9,%rbp` | |
-| 83 | `setae %r9b` | |
-| 84 | `or %r9d,%edi` | |
-| 85 | `test %dil,%r8b` | |
-| 86 | `je 960` | |
-| 87 | `lea -0x8(%rdx,%rcx,1),%rcx` | |
-| 88 | `cmp %rcx,%r12` | |
-| 89 | `setae %cl` | |
-| 90 | `add %r12,%rax` | |
-| 91 | `cmp %rax,%rdx` | |
-| 92 | `setae %al` | |
-| 93 | `or %al,%cl` | |
-| 94 | `je 960` | |
-| 95 | `mov %r14d,%ecx` | |
-| 96 | `mov %rdx,0x18(%rsp)` | |
-| 97 | `mov %rdx,%rax` | |
-| 98 | `shr $0x2,%ecx` | |
-| 99 | `shl $0x4,%rcx` | |
-| 100 | `mov %rcx,%rdi` | |
+| 1 | `push %r15` | save register r15 on stack |
+| 2 | `mov %rsi,%r15` | copie the value of rsi to register r15|
+| 3 | `push %r14` | save register r14 on stack |
+| 4 | `mov %edx,%r14d` | copie value of edx to register 14{d signifies because the destination is the r14d it copies the lower 32 bits and zero-extends them into r14 |
+| 5 | `push %r13` | save register r13 |
+| 6 | `push %r12` | save register r12 |
+| 7 | `push %rbp` | save the old rbp.rbp is callee-saved |
+| 8 | `push %rbx` | save the old rbx.Same is callee-saved |
+| 9 | `mov %rdi,%rbx` | copy the first function argument into rbx.In the System V AMD64 ABI the first argument is in rdi |
+| 10 | `mov %rsi,%rdi` | move the second argument into the first-argument register |
+| 11 | `sub $0x78,%rsp` | allocate 120 bytes of stack space 0x78=120 decimal,rsp moves downward by 120 bytes,creating space for local variables/temporary data |
+| 12 | `mov %ecx,0x14(%rsp)` | store the 4rth argument on the stack.Ecx contains the fourth integer argument and it is stored at mem address rsp+0x14 |
+| 13 | `mov %fs:0x28,%rax` | load the stack-canary value. fs:0x28 is a thread-local location commonly containing the stack protection value. It is loaded into rax |
+| 14 | `mov %rax,0x68(%rsp)` | Save the stack canary in this function's stack frame.The value from rax is stored at rsp+0x68 |
+| 15 | `xor %eax,%eax` | Set eax to zero.XORing a register with itself produces zero.Eax is the lower 32 bits of rax,writting zero to eax also clears the entire rax register x86-64 |
+| 16 | `call llama_synchronize@plt` | calling function.The call instruction saves the return address on the stack and jumps to the function {@plt means the call goes through Procedure Linkage Table,which is used for dynamically linked functions |
+| 17 | `lea 0x30(%rsp),%rax` | calculate the address,without loading the memory contents. lea means "load effective address". This puts rsp+0x30 into rax. It is essentially calculating a pointer to a local stack object |
+| 18 | `movzbl 0x6d(%rbx),%edx` | Load one byte from memory and zero-extend it to 32 bits.It reads the byte at rbx+0x6d,places it in edx and fills the upper bits with 0s|
+| 19 | `lea 0x270(%rbx),%rsi` | calculate the address by adding 0x270 to %rbx and stores the resulting address in %rsi |
+| 20 | `mov %rax,%rdi` | copy the value in %rax into %rdi prepareing the first function argument |
+| 21 | `mov %rax,0x8(%rsp)` | Store the value in %rax at the stack location 8(%rsp) |
+| 22 | `call common_time_meas::common_time_meas(long&, bool)@plt` | call the common_time_meas constructor through the PLT |
+| 23 | `mov %r14d,%esi` | copy the lower 32 bits of %r14 into %esi,preparing a function argument |
+| 24 | `mov %r15,%rdi` | copy the %r15 into %rdi,preparing the first argument |
+| 25 | `call llama_get_sampled_probs_ith@plt` | call the llama_get_sampled_probs_ith retrieving the sampled probabilities for a given token position |
+| 26 | `mov %r14d,%esi` | Copy the lower 32 bits of %r14 into %esi for the next function call |
+| 27 | `mov %r15,%rdi` | copies %r15 into %rdi as the first argument |
+| 28 | `mov %rax,%r13` | save the return value from the previous function call in to %r13 |
+| 29 | `call llama_get_sampled_logits_ith@plt` | call llama_get_sampled_logits_ith retrieving the sampled logits for the specified position |
+| 30 | `mov %r14d,%esi` | copy the lower 32 bits of %r14 inot %esi for the next call |
+| 31 | `mov %r15,%rdi` | copy %r15 into %rdi as the first argument |
+| 32 | `mov %r14d,(%rsp)` | store the lower 32 bits of %r14 at the current stack location |
+| 33 | `mov %rax,%rbp` | save the return value from llama_get_sampled_logits_ith in %rbp |
+| 34 | `call llama_get_sampled_candidates_ith@plt` | call llama_get_sampled_candidates_ith retrievinf the sampled candidate tokens |
+| 35 | `mov %r15,%rdi` | copie r15 into rdi preparing the argument for the next function call |
+| 36 | `mov %rax,%r12` | save the return value from llama_get_sampled_candidates_ith in r12 |
+| 37 | `call llama_get_model@plt` | call llama_model_get_vocab to retrive the vocabulary assiciated with the model |
+| 38 | `mov %rax,%rdi` | move the returned model pointer from rax to rdi |
+| 39 | `call llama_model_get_vocab@plt` | call the llama_model_get_vocab to retrieve the vocabulary associated with the model |
+| 40 | `mov %rax,%rdi` | move the returned vocabulary pointer to rdi,preparing it as the first argument for the following call |
+| 41 | `call llama_vocab_n_tokens@plt` | call llama_vocab_n_tokens to obtain the total number of tokens in the model vocabulary |
+| 42 | `mov (%rsp),%esi` | load the 32-bit value stored at the top of the stack into esi|
+| 43 | `mov %eax,%r14d` | save the return value from llama_vocab_n_tokens(the vocabulary size) in r14d |
+| 44 | `mov %r15,%rdi` | copy r15 into rdi preparing the first argument for the next call |
+| 45 | `test %r13,%r13` | test whether r13 is zero by performing a bitwise AND of the register with itself.Sets the CPU flags without modifying r13 |
+| 46 | `je 370` | jump to address 370 if the Zero flag is set,meaning r13 was zero |
+| 47 | `call llama_get_sampled_probs_count_ith@plt` | call llama_get_sampled_probs_count_ith to obtain the number of sampled probability entries for the specified position |
+| 48 | `mov 0x240(%rbx),%rcx` | load the 64-bit value stored at memory address rbx+0x240 into rcx |
+| 49 | `mov %eax,%r11d` |  save the 32-bit return value from llama_get_sampled_probs_count_ith in r11d |
+| 50 | `mov 0x238(%rbx),%rdx` | loads the 64-bit value at memory address rbx + 0x238 |
+| 51 | `movabs $0xaaaaaaaaaaaaaaab,%rdi` | load the constant **0xAAAAAAAAAAB** into rdi. This a compiler-generated constant used for efficient division by 3 through multiplication and shifting |
+| 52 | `mov %r11,0x18(%rsp)` | save the r11 on the stack at offset 0x18 from rsp |
+| 53 | `mov %r11,%r14` | copy the sampled-probability count from r11 into r14 |
+| 54 | `mov %rcx,%rax` | copy the rcx into rax as the starting value for an arithmetic calculation |
+| 55 | `sub %rdx,%rax` | substract rdx from rax,calculating the difference between the 2 addresses/values |
+| 56 | `sar $0x2,%rax` | Arithmetic-shift rax by 2 bits,effectively dividing the value by 4 while preserving the sign |
+| 57 | `imul %rdi,%rax` | multiply rax by the constant in rdi |
+| 58 | `mov %rax,%rsi` | copy the calculated value from rax into rsi,preparing it for comparison/use as another argument |
+| 59 | `cmp %r11,%rax` | compare the calculated value in rax with r11 by computing rax-r11 and setting the CPU flags |
+| 60 | `jb 9f8` |  jump to 9f8 if rax is below r11 in an unsigned comparison |
+| 61 | `cmp %rsi,%r11` | compare r11 with rsi, setting the CPU flags according to r11-rsi |
+| 62 | `jb 9c8` | jump to 9c8 if r11 is below rsi in an unsigned comparison |
+| 63 | `f7: test %r14d,%r14d` | Test whether the sampled-probability count in r14 is zero. The f7 label marks a branch target in the disassembly |
+| 64 | `je 2a0` | jump to 2a0 if r14d is zero,skipping the following processing when there are no sampled probabilities |
+| 65 | `100: cmp $0x4,%r14d` | Compare the sampled-probability count in r14d with 4. The 100: label marks another branch target |
+| 66 | `jbe 960` | jump to 960 if r14d is less than or equal to 4 using an unsigned comparison |
+| 67 | `mov 0x18(%rsp),%rcx` | reload the previously saved sampled-probability count from the stack into rcx |
+| 68 | `lea 0x4(%rdx),%rdi` | calculate rdx+4 and stores the resulting address/value in rdi |
+| 69 | `lea 0x0(,%rcx,4),%rax` | calculate rcx *4 using lea,without performing a memory access |
+| 70 | `lea (%rcx,%rcx,2),%rcx` | calculates rcx * 3 using lea :rcx + 2* rcx |
+| 71 | `shl $0x2,%rcx` | shift rcx left by 2 bits, multiplying its value by 4 |
+| 72 | `lea 0x0(%r13,%rax,1),%r8` | calculate the r13 + rax and store the result in r8 |
+| 73 | `lea (%rdx,%rcx,1),%r9` | calculate the rdx + rcx and store the result in r9 |
+| 74 | `cmp %r8,%rdi` | compare the r8 with rdi by internally computing rdi-r8 and setting the CPU flags  |
+| 75 | `setae %r8b` | set the r8b to i if rdi is greater than or equal to r8 in an unsigned comparison,otherwise set it to 0 |
+| 76 | `cmp %r9,%r13` | compare r13 with r9 using an unsigned comparison |
+| 77 | `setae %r10b` | set r10b to 1 if r13 is greater than or equal to r9 otherwise set it to 0 |
+| 78 | `or %r10d,%r8d` | perform a bitwise OR between r10d and r9d,combining the results of the 2 comparison conditions |
+| 79 | `lea 0x0(%rbp,%rax,1),%r10` | calculate rbp + rax and store the result in r10 |
+| 80 | `cmp %r10,%rdi` | compare r10 with rdi  setting the CPU flags for an unsigned comparison |
+| 81 | `setae %dil` | set dil to 1 if rdi is greater than or equal to r10 otherwise set it to 0 |
+| 82 | `cmp %r9,%rbp` | compare r9 to rbp  using an unsinged comparison |
+| 83 | `setae %r9b` | set r9b to 1 if rbp is greater than or equal to r9b otherwise set it to 0|
+| 84 | `or %r9d,%edi` |  perform a bitwise OR op between r9d and edi combining the comparison result |
+| 85 | `test %dil,%r8b` | perform a bitwise AND op between dil and r8b to determine whether both condition results are non-zero |
+| 86 | `je 960` | jump to 960 if the result of the previous test is zero,meaning required conditions were not satisfied |
+| 87 | `lea -0x8(%rdx,%rcx,1),%rcx` | calculate rdx + rcx - 8 and store the result into rcx |
+| 88 | `cmp %rcx,%r12` | compare rcx with r12, setting the CPU flags for an usnsigned comparison |
+| 89 | `setae %cl` |  set c1 to 1 if  r12 is greater than or equal to rcx,otherwise set c1 to 0|
+| 90 | `add %r12,%rax` | add r12 to rax |
+| 91 | `cmp %rax,%rdx` | compare rax with rdx setting the CPU flag for an unsigned comparison |
+| 92 | `setae %al` | set a1 to 1 if rdx is greater than or equal to rax,otherwise set a1 to 0 |
+| 93 | `or %al,%cl` | perform a bitwise OR op between c1 and a1 combining the 2 comparison results |
+| 94 | `je 960` | jump to 960 if both comparison conditions resulted in zero |
+| 95 | `mov %r14d,%ecx` | copy the sampled-probability count from r14d into ecx |
+| 96 | `mov %rdx,0x18(%rsp)` | save the value of rdc to the stack at offset 0x18(%rsp) |
+| 97 | `mov %rdx,%rax` | copy rdx into rax  |
+| 98 | `shr $0x2,%ecx` | logical shift right on the ecx by 2 bits,effectively dividing the unsugned value by 4 |
+| 99 | `shl $0x4,%rcx` | shl rcx left by 4 bits,multiplying its value by 16 |
+| 100 | `mov %rcx,%rdi` | copy rcx into rdi |
 | 101 | `xor %ecx,%ecx` | |
 | 102 | `mov %rdi,%rdx` | |
 | 103 | `nop` | |
