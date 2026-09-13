@@ -107,57 +107,57 @@ The profiling percentages, navigation arrows, and TUI decorations have been remo
 | 98 | `shr $0x2,%ecx` | logical shift right on the ecx by 2 bits,effectively dividing the unsugned value by 4 |
 | 99 | `shl $0x4,%rcx` | shl rcx left by 4 bits,multiplying its value by 16 |
 | 100 | `mov %rcx,%rdi` | copy rcx into rdi |
-| 101 | `xor %ecx,%ecx` | |
-| 102 | `mov %rdi,%rdx` | |
-| 103 | `nop` | |
-| 104 | `198: lea (%r12,%rcx,1),%rdi` | |
-| 105 | `add $0x30,%rax` | |
-| 106 | `mov 0xc(%rdi),%r8d` | |
-| 107 | `mov 0x8(%rdi),%r9d` | |
-| 108 | `mov 0x4(%rdi),%r10d` | |
-| 109 | `mov (%rdi),%r11d` | |
-| 110 | `lea 0x0(%rbp,%rcx,1),%rdi` | |
-| 111 | `movss 0xc(%rdi),%xmm0` | |
-| 112 | `movss 0x8(%rdi),%xmm1` | |
-| 113 | `movss 0x4(%rdi),%xmm2` | |
-| 114 | `movss (%rdi),%xmm3` | |
-| 115 | `lea 0x0(%r13,%rcx,1),%rdi` | |
-| 116 | `add $0x10,%rcx` | |
-| 117 | `movss 0xc(%rdi),%xmm4` | |
-| 118 | `movss 0x8(%rdi),%xmm5` | |
-| 119 | `movss 0x4(%rdi),%xmm6` | |
-| 120 | `movss (%rdi),%xmm7` | |
-| 121 | `mov %r11d,-0x30(%rax)` | |
-| 122 | `unpcklps %xmm5,%xmm1` | |
-| 123 | `unpcklps %xmm4,%xmm0` | |
-| 124 | `mov %r10d,-0x24(%rax)` | |
-| 125 | `unpcklps %xmm7,%xmm3` | |
-| 126 | `unpcklps %xmm6,%xmm2` | |
-| 127 | `mov %r9d,-0x18(%rax)` | |
-| 128 | `mov %r8d,-0xc(%rax)` | |
-| 129 | `movlps %xmm3,-0x2c(%rax)` | |
-| 130 | `movlps %xmm2,-0x20(%rax)` | |
-| 131 | `movlps %xmm1,-0x14(%rax)` | |
-| 132 | `movlps %xmm0,-0x8(%rax)` | |
-| 133 | `cmp %rdx,%rcx` | |
-| 134 | `jne 198` | |
-| 135 | `mov %r14d,%eax` | |
-| 136 | `mov 0x18(%rsp),%rdx` | |
-| 137 | `and $0xfffffffc,%eax` | |
-| 138 | `test $0x3,%r14b` | |
-| 139 | `je 2a0` | |
-| 140 | `mov %eax,%ecx` | |
-| 141 | `movss 0x0(%r13,%rcx,4),%xmm1` | |
-| 142 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
-| 143 | `lea (%rcx,%rcx,2),%rdi` | |
-| 144 | `mov (%r12,%rcx,4),%r8d` | |
-| 145 | `lea (%rdx,%rdi,4),%rdi` | |
-| 146 | `lea 0x1(%rax),%ecx` | |
-| 147 | `unpcklps %xmm1,%xmm0` | |
-| 148 | `mov %r8d,(%rdi)` | |
-| 149 | `movlps %xmm0,0x4(%rdi)` | |
-| 150 | `cmp %r14d,%ecx` | |
-| 151 | `jae 2a0` | |
+| 101 | `xor %ecx,%ecx` | clear ecx,setting it to 0.This initializes the loop offset/index |
+| 102 | `mov %rdi,%rdx` | copy rdi into rdx,preserving the calculated value for use as a loop boundary or destination address |
+| 103 | `nop` | No operation,does nothing |
+| 104 | `198: lea (%r12,%rcx,1),%rdi` | calculates r12 + rcx and stores the resulting address in rdi.This forms the address of the current element in r12 data region |
+| 105 | `add $0x30,%rax` | add 0x30(48bytes) to rax advancing the destination pointer by 48 |
+| 106 | `mov 0xc(%rdi),%r8d` | load a 32-bit value from offset 12 of the current rdi structure/element into r8d |
+| 107 | `mov 0x8(%rdi),%r9d` | load a 32-bit value from offset 8 into r9d |
+| 108 | `mov 0x4(%rdi),%r10d` | load a 32-bit value from offset 4 into r10d |
+| 109 | `mov (%rdi),%r11d` | load the first 32-bit value at rdi into r11d |
+| 110 | `lea 0x0(%rbp,%rcx,1),%rdi` | calculates rbp + rcx obtaining the address od the corresponding element in the rbp data region |
+| 111 | `movss 0xc(%rdi),%xmm0` | load a single-precision floating-point value (32-bit float) from offset 12 into xmm0 |
+| 112 | `movss 0x8(%rdi),%xmm1` | load a single-precision floating-point value (32-bit float) from offset 8 into xmm1 |
+| 113 | `movss 0x4(%rdi),%xmm2` | load a single-precision floating-point value (32-bit float) from offset 4 into xmm2 |
+| 114 | `movss (%rdi),%xmm3` | load a single-precision floating-point value (32-bit float) from rdi into xmm3  |
+| 115 | `lea 0x0(%r13,%rcx,1),%rdi` | calculate r13+rcx,obtaining the address of the corresponding element in the r13 data region |
+| 116 | `add $0x10,%rcx` | Advance the loop offset by 16 bytes |
+| 117 | `movss 0xc(%rdi),%xmm4` |  load a single-precision floating-point value (32-bit float) from offset 12 into xmm4 |
+| 118 | `movss 0x8(%rdi),%xmm5` | load a single-precision floating-point value (32-bit float) from offset 8 into xmm5 |
+| 119 | `movss 0x4(%rdi),%xmm6` | load a single-precision floating-point value (32-bit float) from offset 4 into xmm6 |
+| 120 | `movss (%rdi),%xmm7` |  load a single-precision floating-point value (32-bit float) from rdi into xmm7 |
+| 121 | `mov %r11d,-0x30(%rax)` | store the first 32-bit value loaded from the r12 region into the destination buffer at offset -48 |
+| 122 | `unpcklps %xmm5,%xmm1` | interleaves the lower single-precision point values of xmm1 and xmm5,preparing for a packed/SIMD layout |
+| 123 | `unpcklps %xmm4,%xmm0` | interleaves the lower single-precision point values of xmm0 and xmm4 |
+| 124 | `mov %r10d,-0x24(%rax)` | store the value from r10d into the destination buffer at offset -36 |
+| 125 | `unpcklps %xmm7,%xmm3` | interleaves the lower single-precision point values of xmm7 and xmm3 |
+| 126 | `unpcklps %xmm6,%xmm2` | interleaves the lower single-precision point values of xmm2 and xmm6 |
+| 127 | `mov %r9d,-0x18(%rax)` | store the value from r9d into the destination buffer at offset -18 |
+| 128 | `mov %r8d,-0xc(%rax)` | store the value from r8d into the destination buffer at offset -12 |
+| 129 | `movlps %xmm3,-0x2c(%rax)` | store the lower 64 bits of xmm3(2 32-bit floating-point values) into the destination buffer at offset -44 |
+| 130 | `movlps %xmm2,-0x20(%rax)` | store the lower 64 bits of xmm2(2 32-bit floating-point values) into the destination buffer at offset -20 |
+| 131 | `movlps %xmm1,-0x14(%rax)` | store the lower 64 bits of xmm1(2 32-bit floating-point values) into the destination buffer at offset -44 |
+| 132 | `movlps %xmm0,-0x8(%rax)` | store the lower 64 bits of xmm0(2 32-bit floating-point values) into the destination buffer at offset -8 |
+| 133 | `cmp %rdx,%rcx` | compare the current loop offset rcx against the loop boundary stored in rdx |
+| 134 | `jne 198` | jump back to label 198 if rcx and rdx are not equal,continuing the loop |
+| 135 | `mov %r14d,%eax` | copy the sampled-probability count from r14d into eax |
+| 136 | `mov 0x18(%rsp),%rdx` | reload the saved value from stack offset 0x18 (%rsp) into rdx |
+| 137 | `and $0xfffffffc,%eax` | clear the lowest 2 bits of eax,effectively rounding the count down to the nearest multiple of 4| 
+| 138 | `test $0x3,%r14b` | test the lowest 2 bits of r14b to determine whether the sampled count has a remainder when divided by 4|
+| 139 | `je 2a0` | jump to 2a0 if the lowest 2 bits of r14b are 0,meaning the count is already divisible by 4|
+| 140 | `mov %eax,%ecx` |  copy the rounded-down count from eax into ecx |
+| 141 | `movss 0x0(%r13,%rcx,4),%xmm1` | load a single-precision floating-point value from r13 + rcx * 4 into %xmm1 |
+| 142 | `movss 0x0(%rbp,%rcx,4),%xmm0` | load a single-precision floating-point value from r13 + rcx * 4 into %xmm0 |
+| 143 | `lea (%rcx,%rcx,2),%rdi` | calculate rcx * 3 using lea and store the result in rdi |
+| 144 | `mov (%r12,%rcx,4),%r8d` | load a 32-bit value from r12 + rcx *4 into r8d |
+| 145 | `lea (%rdx,%rdi,4),%rdi` | calculate the rdx + (%rdi * 4) effectively rdx + rcx * 12 and stores the resulting address in rdi |
+| 146 | `lea 0x1(%rax),%ecx` | calculates eax +1 and stores the result in ecx advancing the element index by one |
+| 147 | `unpcklps %xmm1,%xmm0` | interleaves the lower single-precision values from xmm0 and xmm1 creating a packed paid of floats |
+| 148 | `mov %r8d,(%rdi)` | store the 32-bit value from r8d at the calculated sestination address |
+| 149 | `movlps %xmm0,0x4(%rdi)` | store the lower 64 bits of xmm0 at offset 4 from the destination address |
+| 150 | `cmp %r14d,%ecx` | compare r14 with ecx setting the CPU flag |
+| 151 | `jae 2a0` | jump to 2a0 if r14d equals ecx  |
 | 152 | `movss 0x0(%r13,%rcx,4),%xmm1` | |
 | 153 | `mov (%r12,%rcx,4),%r8d` | |
 | 154 | `lea (%rcx,%rcx,2),%rdi` | |
