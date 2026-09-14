@@ -254,112 +254,112 @@ The profiling percentages, navigation arrows, and TUI decorations have been remo
 | 245 | `je 2a0` | jump to label 2a0 if r13d equals 0,skipping the processing loop |
 | 246 | `cmp $0x8,%r13d` | compare r13d with 8 |
 | 247 | `jbe a38` | jump to label a38 if the counter r13d is less than or equal to 8 using an unsigned comparison |
-| 248 | `3f1: lea 0x0(,%r14,4),%rcx` | label 3f1  |
-| 249 | `lea (%r14,%r14,2),%rax` | |
-| 250 | `shl $0x2,%rax` | |
-| 251 | `lea 0x0(%rbp,%rcx,1),%rdi` | |
-| 252 | `lea 0x4(%rdx),%r8` | |
-| 253 | `cmp %rdi,%r8` | |
-| 254 | `lea (%rdx,%rax,1),%r8` | |
-| 255 | `setae %dil` | |
-| 256 | `cmp %r8,%rbp` | |
-| 257 | `setae %r8b` | |
-| 258 | `or %r8b,%dil` | |
-| 259 | `je a38` | |
-| 260 | `lea -0x8(%rdx,%rax,1),%rax` | |
-| 261 | `cmp %rax,%r12` | |
-| 262 | `setae %al` | |
-| 263 | `add %r12,%rcx` | |
-| 264 | `cmp %rcx,%rdx` | |
-| 265 | `setae %cl` | |
-| 266 | `or %cl,%al` | |
-| 267 | `je a38` | |
-| 268 | `mov %r13d,%r11d` | |
-| 269 | `mov %rdx,%rax` | |
-| 270 | `xor %ecx,%ecx` | |
-| 271 | `shr $0x2,%r11d` | |
-| 272 | `shl $0x4,%r11` | |
-| 273 | `nop` | |
-| 274 | `458: lea (%r12,%rcx,1),%rdi` | |
-| 275 | `add $0x30,%rax` | |
-| 276 | `mov 0xc(%rdi),%r8d` | |
-| 277 | `mov 0x8(%rdi),%r9d` | |
-| 278 | `mov 0x4(%rdi),%r10d` | |
-| 279 | `mov (%rdi),%r14d` | |
-| 280 | `lea 0x0(%rbp,%rcx,1),%rdi` | |
-| 281 | `add $0x10,%rcx` | |
-| 282 | `movss 0x8(%rdi),%xmm1` | |
-| 283 | `movss 0x4(%rdi),%xmm2` | |
-| 284 | `movss (%rdi),%xmm3` | |
-| 285 | `movss 0xc(%rdi),%xmm0` | |
-| 286 | `mov %r14d,-0x30(%rax)` | |
-| 287 | `mov %r10d,-0x24(%rax)` | |
-| 288 | `mov %r9d,-0x18(%rax)` | |
-| 289 | `mov %r8d,-0xc(%rax)` | |
-| 290 | `movss %xmm3,-0x2c(%rax)` | |
-| 291 | `movss %xmm2,-0x20(%rax)` | |
-| 292 | `movss %xmm1,-0x14(%rax)` | |
-| 293 | `movss %xmm0,-0x8(%rax)` | |
-| 294 | `movl $0x0,-0x28(%rax)` | |
-| 295 | `movl $0x0,-0x1c(%rax)` | |
-| 296 | `movl $0x0,-0x10(%rax)` | |
-| 297 | `movl $0x0,-0x4(%rax)` | |
-| 298 | `cmp %r11,%rcx` | |
-| 299 | `jne 458` | |
-| 300 | `mov %r13d,%eax` | |
-| 301 | `and $0xfffffffc,%eax` | |
-| 302 | `test $0x3,%r13b` | |
-| 303 | `je 2a0` | |
-| 304 | `mov %eax,%ecx` | |
-| 305 | `mov (%r12,%rcx,4),%r8d` | |
-| 306 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
-| 307 | `lea (%rcx,%rcx,2),%rdi` | |
-| 308 | `lea 0x1(%rax),%ecx` | |
-| 309 | `lea (%rdx,%rdi,4),%rdi` | |
-| 310 | `mov %r8d,(%rdi)` | |
-| 311 | `movl $0x0,0x8(%rdi)` | |
-| 312 | `movss %xmm0,0x4(%rdi)` | |
-| 313 | `cmp %r13d,%ecx` | |
-| 314 | `jae 2a0` | |
-| 315 | `mov (%r12,%rcx,4),%r8d` | |
-| 316 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
-| 317 | `lea (%rcx,%rcx,2),%rdi` | |
-| 318 | `add $0x2,%eax` | |
-| 319 | `lea (%rdx,%rdi,4),%rdi` | |
-| 320 | `mov %r8d,(%rdi)` | |
-| 321 | `movl $0x0,0x8(%rdi)` | |
-| 322 | `movss %xmm0,0x4(%rdi)` | |
-| 323 | `cmp %r13d,%eax` | |
-| 324 | `jae 2a0` | |
-| 325 | `mov (%r12,%rax,4),%edi` | |
-| 326 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
-| 327 | `lea (%rax,%rax,2),%rcx` | |
-| 328 | `lea (%rdx,%rcx,4),%rcx` | |
-| 329 | `mov %edi,(%rcx)` | |
-| 330 | `movl $0x0,0x8(%rcx)` | |
-| 331 | `movss %xmm0,0x4(%rcx)` | |
-| 332 | `jmp 2a0` | |
-| 333 | `nop` | |
-| 334 | `568: lea 0x250(%rbx),%r12` | |
-| 335 | `mov 0x1f0(%rbx),%rdi` | |
-| 336 | `mov %r12,%rsi` | |
-| 337 | `call llama_sampler_apply@plt` | |
-| 338 | `cmpb $0x0,0x14(%rsp)` | |
-| 339 | `je 5b2` | |
-| 340 | `mov 0x1e8(%rbx),%rdi` | |
-| 341 | `test %rdi,%rdi` | |
-| 342 | `je 5b2` | |
-| 343 | `mov 0x1f0(%rbx),%rax` | |
-| 344 | `test %rax,%rax` | |
-| 345 | `je 5aa` | |
-| 346 | `cmpb $0x0,0xd0(%rbx)` | |
-| 347 | `jne ba9` | |
-| 348 | `5aa: mov %r12,%rsi` | |
-| 349 | `call llama_sampler_apply@plt` | |
-| 350 | `5b2: mov 0x1f8(%rbx),%rdi` | |
-| 351 | `mov %r12,%rsi` | |
-| 352 | `call llama_sampler_apply@plt` | |
-| 353 | `mov 0x260(%rbx),%rax` | |
+| 248 | `3f1: lea 0x0(,%r14,4),%rcx` | label 3f1 calculate r14 * 4 and store the result into rcx  |
+| 249 | `lea (%r14,%r14,2),%rax` | calculate r14 * 3 and store the result in rax |
+| 250 | `shl $0x2,%rax` | shift left rax by 4, multiplying rax by 4 |
+| 251 | `lea 0x0(%rbp,%rcx,1),%rdi` | calculate rbp + rcx producing an address based on the sampled-logit index |
+| 252 | `lea 0x4(%rdx),%r8` | calculate rdx + 4 producing the address immediately after the first 4-byte field |
+| 253 | `cmp %rdi,%r8` | compare r8 with rdi using an unsigned comparison as part of a mem range check |
+| 254 | `lea (%rdx,%rax,1),%r8` | calculate the rdx + rax effectively rdx + 12 * r14, producing the end of the relevant mem range |
+| 255 | `setae %dil` | set dil to 1 if r8 is greather than or equal to rdi,otherwise set dil to 0 |
+| 256 | `cmp %r8,%rbp` | compare r8 with rbp |
+| 257 | `setae %r8b` | set r8b to 1 if rbp is greater than or eqaul to r8,otherwise set it to 0 |
+| 258 | `or %r8b,%dil` | combine the 2 boolean comparison results using a bitwise OR |
+| 259 | `je a38` | jump to label a38 if the combined result is zero,indicating the required mem-range conditions were not satisfied |
+| 260 | `lea -0x8(%rdx,%rax,1),%rax` | calculate rdx + rax -8,producing an address near the end of the mem region |
+| 261 | `cmp %rax,%r12` | compare rax with r12 |
+| 262 | `setae %al` | set al to 1 if r12 is greater than or equal to rax,otherwise set it to 0 |
+| 263 | `add %r12,%rcx` | add r12 to rcx |
+| 264 | `cmp %rcx,%rdx` | compare rcx with rdx|
+| 265 | `setae %cl` | set cl to 1 if rdx is greater than or equal to rcx,otherwise set cl to 0 |
+| 266 | `or %cl,%al` | combines the 2 boolean comparison results using a Bitwise OR |
+| 267 | `je a38` | jump to laber a38 if the the combined result is zero, failing the pointer/range validation |
+| 268 | `mov %r13d,%r11d` | copy the sampled-logit count into r11d |
+| 269 | `mov %rdx,%rax` | copy rdx into rax |
+| 270 | `xor %ecx,%ecx` | clear ecx, initializing the loop offset to 0|
+| 271 | `shr $0x2,%r11d` | logic shift right r11d by 4, dividing the r11d by 4 |
+| 272 | `shl $0x4,%r11` | logic shift left r11 by 16 |
+| 273 | `nop` | No operation |
+| 274 | `458: lea (%r12,%rcx,1),%rdi` | label 458, calculate r12+ rcx obtaining the address of the current input element |
+| 275 | `add $0x30,%rax` | advances the destination pointer[rax] by 48 bytes |
+| 276 | `mov 0xc(%rdi),%r8d` | load a 32-bit value at offset 12 from the current input element |
+| 277 | `mov 0x8(%rdi),%r9d` | load the 32-bit value at offset 8 |
+| 278 | `mov 0x4(%rdi),%r10d` | load the 32-bit value at offset 4|
+| 279 | `mov (%rdi),%r14d` | load the first 32-bit value from the current input element into r14d |
+| 280 | `lea 0x0(%rbp,%rcx,1),%rdi` | calculate rbp + rcx,obtaining the corresponding address in the second input region |
+| 281 | `add $0x10,%rcx` | advance the loop offset by 16 bytes,moving to the next group of input data |
+| 282 | `movss 0x8(%rdi),%xmm1` | load a 32-bit single-precision floating-point value from offset 8 into xmm1 |
+| 283 | `movss 0x4(%rdi),%xmm2` | load a 32-bit floating-point value from offset 4 into xmm2 |
+| 284 | `movss (%rdi),%xmm3` | load a 32-bit floating-point value from offset 0 into xmm3 |
+| 285 | `movss 0xc(%rdi),%xmm0` | load a 32-bit floating-point value from offset 12 into xmm0 |
+| 286 | `mov %r14d,-0x30(%rax)` | store the 32-bit value from r14d into the destination at offset -48 |
+| 287 | `mov %r10d,-0x24(%rax)` | store the value from r10d at destination offset -36 |
+| 288 | `mov %r9d,-0x18(%rax)` | store the value from r19d at destination offset -24 |
+| 289 | `mov %r8d,-0xc(%rax)` |store the value from r8d at destination offset -12 |
+| 290 | `movss %xmm3,-0x2c(%rax)` | store the 32-bit floating-point value from xmm3 at destination offset -44 |
+| 291 | `movss %xmm2,-0x20(%rax)` | store the 32-bit floating-point value from xmm2 at destination offset -32 |
+| 292 | `movss %xmm1,-0x14(%rax)` | store the 32-bit floating-point value from xmm1 at destination offset -20 |
+| 293 | `movss %xmm0,-0x8(%rax)` | store the 32-bit floating-point value from xmm0 at destination offset -8 |
+| 294 | `movl $0x0,-0x28(%rax)` |  store zero in the 32-bit field at offset -40 |
+| 295 | `movl $0x0,-0x1c(%rax)` | store zero at offset -28 |
+| 296 | `movl $0x0,-0x10(%rax)` | store zero at offset -16|
+| 297 | `movl $0x0,-0x4(%rax)` | store zero at offset -4 |
+| 298 | `cmp %r11,%rcx` | compare r11 with rcx [rcx= current loop offset and r11 calculated loop boundary] |
+| 299 | `jne 458` | jump to label 458 if the loop offset has not reached the boundary, continuing the loop |
+| 300 | `mov %r13d,%eax` | copy the original sampled-logit count from r13d into eax,preparing it for subsequent processing |
+| 301 | `and $0xfffffffc,%eax` | clear the lowest 2 bits of eax,rounding the count down to a multiple of 4 |
+| 302 | `test $0x3,%r13b` | test whether r13 has any of its lowest 2bit set -effectively checks r13 % 4 |
+| 303 | `je 2a0` | jump to label 2a0 if r13b is divisible by 4, meaning no remainder elements need processing |
+| 304 | `mov %eax,%ecx` |  copy the rounded-down count into ecx, using it as the starting index for the remainder loop |
+| 305 | `mov (%r12,%rcx,4),%r8d` | load a 32-bit value from the r12 array at index rcx ( r12 + rcx *4) |
+| 306 | `movss 0x0(%rbp,%rcx,4),%xmm0` | load the corresponding 32-bit floating-point value from the rbp array into xmm0 |
+| 307 | `lea (%rcx,%rcx,2),%rdi` | compute 3 * rcx using LEA|
+| 308 | `lea 0x1(%rax),%ecx` | compute eax + 1 and stores it into ecx without modifying eax |
+| 309 | `lea (%rdx,%rdi,4),%rdi` | compute destination address rdx + (3 * old_rcx * 4) = rdx + 12 * old rcx |
+| 310 | `mov %r8d,(%rdi)` | store the loaded 32-bit value into the destination structure |
+| 311 | `movl $0x0,0x8(%rdi)` |  store 0 into the destination field at offset +8 |
+| 312 | `movss %xmm0,0x4(%rdi)` | storethe floating-point value inot the destination field at offset +4 |
+| 313 | `cmp %r13d,%ecx` | compare r13d with ecx |
+| 314 | `jae 2a0` | jump to label 2a0 if ecx greater than or equal to r13d,meaning no more elements remaining |
+| 315 | `mov (%r12,%rcx,4),%r8d` | load the 32-bit value from r12 array into r8d |
+| 316 | `movss 0x0(%rbp,%rcx,4),%xmm0` | load the corresponding floating-point value from rbp into xmm0 |
+| 317 | `lea (%rcx,%rcx,2),%rdi` | compute 3 * rcx  |
+| 318 | `add $0x2,%eax` | advance eax by 2 |
+| 319 | `lea (%rdx,%rdi,4),%rdi` | compute destination address rdx + rdi * 4 |
+| 320 | `mov %r8d,(%rdi)` | store the 32-bit value in r8d at the beginning of the destination entry |
+| 321 | `movl $0x0,0x8(%rdi)` | store 0 at destination offset +8 |
+| 322 | `movss %xmm0,0x4(%rdi)` | store the 32-bit floating-point value from the lower part of xmm0 at destination offset +4 |
+| 323 | `cmp %r13d,%eax` | compare eax with r13d |
+| 324 | `jae 2a0` | jump to label 2a0 if eax greater than or equal to r13d |
+| 325 | `mov (%r12,%rax,4),%edi` | load a 32-bit value from r12 + rax *4 into edi |
+| 326 | `movss 0x0(%rbp,%rax,4),%xmm0` | load the corresponding 32-bit float from rbp + rax * 4 inot xmm0 |
+| 327 | `lea (%rax,%rax,2),%rcx` | compute 3 * rax and store it in rcx |
+| 328 | `lea (%rdx,%rcx,4),%rcx` | compute destination address rdx + rcx * 4 and store it into rcx |
+| 329 | `mov %edi,(%rcx)` | sore the loaded 32-bit value at the begging of the destination entry |
+| 330 | `movl $0x0,0x8(%rcx)` | store 0 at destination offset +8 |
+| 331 | `movss %xmm0,0x4(%rcx)` |  store the floating-point value at the destination offset +4 |
+| 332 | `jmp 2a0` | jump to label 2a0 after the remaining elements have been processed |
+| 333 | `nop` | No operation  |
+| 334 | `568: lea 0x250(%rbx),%r12` | label 568. compute the address rbx + 0x250 and store it in r12 |
+| 335 | `mov 0x1f0(%rbx),%rdi` | load the 64-bit value stored at rbx + 0x1f0 into rdi,preparing the first fuction argument |
+| 336 | `mov %r12,%rsi` | copy r12 into rsi|
+| 337 | `call llama_sampler_apply@plt` | call llama_sampler_apply with arguments prepared in rsi and rdi |
+| 338 | `cmpb $0x0,0x14(%rsp)` | compare the byte at stack address rsp + 0x14 with 0,this checks a boolean/flag |
+| 339 | `je 5b2` | jump to label 5b2 if that flag is 0 |
+| 340 | `mov 0x1e8(%rbx),%rdi` | load the 64-bit value at rbx+ 0x1e8 into rdi |
+| 341 | `test %rdi,%rdi` | test rdi against zero by performing rdi & rdi,set the zero flag if it is zero |
+| 342 | `je 5b2` | jump to label 5b2 if rdi is equal to 0 |
+| 343 | `mov 0x1f0(%rbx),%rax` | load the value rbx + 01f0 into rax |
+| 344 | `test %rax,%rax` | test whether rax is 0 by performing rax & rax |
+| 345 | `je 5aa` | jump to label 5aa if rax is equal to 0|
+| 346 | `cmpb $0x0,0xd0(%rbx)` | compare the byte at rbx + 0xd0 with zero, checking another flag |
+| 347 | `jne ba9` | jump to label ba9 if the flag from the previous line is non zero |
+| 348 | `5aa: mov %r12,%rsi` | label 5aa, copy r12 into rsi |
+| 349 | `call llama_sampler_apply@plt` | call llama_sampler_apply again |
+| 350 | `5b2: mov 0x1f8(%rbx),%rdi` | label 5b2, load the value rbx + 0x1f8 into rdi |
+| 351 | `mov %r12,%rsi` | copy r12 into rsi |
+| 352 | `call llama_sampler_apply@plt` | call llama_sampler_apply again|
+| 353 | `mov 0x260(%rbx),%rax` | load the 64-bit value at rbx + 0x260 into rax |
 | 354 | `mov 0x250(%rbx),%r8` | |
 | 355 | `cmpb $0x0,0x14(%rsp)` | |
 | 356 | `lea (%rax,%rax,2),%rax` | |
