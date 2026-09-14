@@ -157,104 +157,104 @@ The profiling percentages, navigation arrows, and TUI decorations have been remo
 | 148 | `mov %r8d,(%rdi)` | store the 32-bit value from r8d at the calculated sestination address |
 | 149 | `movlps %xmm0,0x4(%rdi)` | store the lower 64 bits of xmm0 at offset 4 from the destination address |
 | 150 | `cmp %r14d,%ecx` | compare r14 with ecx setting the CPU flag |
-| 151 | `jae 2a0` | jump to 2a0 if r14d equals ecx  |
-| 152 | `movss 0x0(%r13,%rcx,4),%xmm1` | |
-| 153 | `mov (%r12,%rcx,4),%r8d` | |
-| 154 | `lea (%rcx,%rcx,2),%rdi` | |
-| 155 | `add $0x2,%eax` | |
-| 156 | `movss 0x0(%rbp,%rcx,4),%xmm0` | |
-| 157 | `lea (%rdx,%rdi,4),%rdi` | |
-| 158 | `mov %r8d,(%rdi)` | |
-| 159 | `unpcklps %xmm1,%xmm0` | |
-| 160 | `movlps %xmm0,0x4(%rdi)` | |
-| 161 | `cmp %r14d,%eax` | |
-| 162 | `jae 2a0` | |
-| 163 | `mov (%r12,%rax,4),%edi` | |
-| 164 | `lea (%rax,%rax,2),%rcx` | |
-| 165 | `movss 0x0(%r13,%rax,4),%xmm1` | |
-| 166 | `movss 0x0(%rbp,%rax,4),%xmm0` | |
-| 167 | `lea (%rdx,%rcx,4),%rcx` | |
-| 168 | `mov %edi,(%rcx)` | |
-| 169 | `unpcklps %xmm1,%xmm0` | |
-| 170 | `movlps %xmm0,0x4(%rcx)` | |
-| 171 | `nop` | |
-| 172 | `2a0: mov %rsi,0x258(%rbx)` | |
-| 173 | `mov (%rsp),%esi` | |
-| 174 | `mov %r15,%rdi` | |
-| 175 | `mov %rdx,0x250(%rbx)` | |
-| 176 | `movq $0xffffffffffffffff,0x260(%rbx)` | |
-| 177 | `movb $0x0,0x268(%rbx)` | |
-| 178 | `call llama_get_sampled_token_ith@plt` | |
-| 179 | `mov %eax,%ebp` | |
-| 180 | `cmp $0xffffffff,%eax` | |
-| 181 | `je 568` | |
-| 182 | `call common_log_get_verbosity_thold()@plt` | |
-| 183 | `cmp $0x4,%eax` | |
-| 184 | `jg 998` | |
-| 185 | `2e4: cmpq $0x0,0x1e8(%rbx)` | |
-| 186 | `jne 105e` | |
-| 187 | `cmpq $0x0,0x1f0(%rbx)` | |
-| 188 | `jne 1029` | |
-| 189 | `mov 0x258(%rbx),%rcx` | |
-| 190 | `test %rcx,%rcx` | |
-| 191 | `je 338` | |
-| 192 | `mov 0x250(%rbx),%rdx` | |
-| 193 | `xor %eax,%eax` | |
-| 194 | `jmp 32d` | |
-| 195 | `nop` | |
-| 196 | `320: add $0x1,%rax` | |
-| 197 | `add $0xc,%rdx` | |
-| 198 | `cmp %rax,%rcx` | |
-| 199 | `je 338` | |
-| 200 | `32d: cmp %ebp,(%rdx)` | |
-| 201 | `jne 320` | |
-| 202 | `mov %rax,0x260(%rbx)` | |
-| 203 | `338: mov 0x8(%rsp),%rdi` | |
-| 204 | `call common_time_meas::~common_time_meas()@plt` | |
-| 205 | `mov 0x68(%rsp),%rax` | |
-| 206 | `sub %fs:0x28,%rax` | |
-| 207 | `jne f91` | |
-| 208 | `add $0x78,%rsp` | |
-| 209 | `mov %ebp,%eax` | |
-| 210 | `pop %rbx` | |
-| 211 | `pop %rbp` | |
-| 212 | `pop %r12` | |
-| 213 | `pop %r13` | |
-| 214 | `pop %r14` | |
-| 215 | `pop %r15` | |
-| 216 | `← ret` | |
-| 217 | `nop` | |
-| 218 | `370: test %rbp,%rbp` | |
-| 219 | `je a70` | |
-| 220 | `call llama_get_sampled_logits_count_ith@plt` | |
-| 221 | `mov 0x240(%rbx),%rcx` | |
-| 222 | `mov %eax,%r14d` | |
-| 223 | `mov 0x238(%rbx),%rdx` | |
-| 224 | `movabs $0xaaaaaaaaaaaaaaab,%rdi` | |
-| 225 | `mov %r14,%r13` | |
-| 226 | `mov %rcx,%rax` | |
-| 227 | `sub %rdx,%rax` | |
-| 228 | `sar $0x2,%rax` | |
-| 229 | `imul %rdi,%rax` | |
-| 230 | `mov %rax,%rsi` | |
-| 231 | `cmp %r14,%rax` | |
-| 232 | `jb b20` | |
-| 233 | `cmp %rax,%r14` | |
-| 234 | `jae 3de` | |
-| 235 | `lea (%r14,%r14,2),%rax` | |
-| 236 | `shl $0x2,%rax` | |
-| 237 | `lea (%rdx,%rax,1),%r8` | |
-| 238 | `cmp %r8,%rcx` | |
-| 239 | `je 3de` | |
-| 240 | `sar $0x2,%rax` | |
-| 241 | `mov %r8,0x240(%rbx)` | |
-| 242 | `imul %rdi,%rax` | |
-| 243 | `mov %rax,%rsi` | |
-| 244 | `3de: test %r13d,%r13d` | |
-| 245 | `je 2a0` | |
-| 246 | `cmp $0x8,%r13d` | |
-| 247 | `jbe a38` | |
-| 248 | `3f1: lea 0x0(,%r14,4),%rcx` | |
+| 151 | `jae 2a0` | jump to 2a0 if ecx is greater than or equal to r14d  |
+| 152 | `movss 0x0(%r13,%rcx,4),%xmm1` | load a 32-bit float-point value from r13 + rcx *4 into xmm1 |
+| 153 | `mov (%r12,%rcx,4),%r8d` |  move a 32-bit float-point value from r12 + rcx * 4 into r8d|
+| 154 | `lea (%rcx,%rcx,2),%rdi` | calculate rcx * 3 and stores the result in rdi |
+| 155 | `add $0x2,%eax` | add 2 to eax, advancing the processed-element index by 2 |
+| 156 | `movss 0x0(%rbp,%rcx,4),%xmm0` | load 32-bit float-value from rbp + rcx * 4 into xmm0 |
+| 157 | `lea (%rdx,%rdi,4),%rdi` | calculate the rdix + rdi *12 producing the destination address  |
+| 158 | `mov %r8d,(%rdi)` | store the 32-bit value from r8d at the previously calculated address |
+| 159 | `unpcklps %xmm1,%xmm0` | interleave the 2 loaded single-prec floating-point values in xmm0 and xmm1 |
+| 160 | `movlps %xmm0,0x4(%rdi)` | store the 64 bits of xmm0 at offset 4 from destination |
+| 161 | `cmp %r14d,%eax` | compare r14d with eax  |
+| 162 | `jae 2a0` | jump to 2a0 if eax greater than or equal to r14d |
+| 163 | `mov (%r12,%rax,4),%edi` | load 32 bit value from r12 + rax * 4 into edi |
+| 164 | `lea (%rax,%rax,2),%rcx` | calculate rax * 3 and store the result into rcx |
+| 165 | `movss 0x0(%r13,%rax,4),%xmm1` | load a 32-bit floating point value from r13 + rax * 4 into xmm1 |
+| 166 | `movss 0x0(%rbp,%rax,4),%xmm0` | load a 32 bit floating point value from rbp + rax * 4 into xmm0|
+| 167 | `lea (%rdx,%rcx,4),%rcx` | calculate rdx +(rcx * 4) into rcx,producing the destination address |
+| 168 | `mov %edi,(%rcx)` | store the value edi into the address calculated previously |
+| 169 | `unpcklps %xmm1,%xmm0` | interleave the 2 single-precision floating point values in xmm0 and xmm1 |
+| 170 | `movlps %xmm0,0x4(%rcx)` | store the lower 64 bits of xmm0 at offset 4 from the destination address |
+| 171 | `nop` | No operation |
+| 172 | `2a0: mov %rsi,0x258(%rbx)` | label 2a0 store the value of rs1 into the structure at offset 0x258 from rbx.This is likely updating an internal pointer/counter |
+| 173 | `mov (%rsp),%esi` | load into esi the 32bit value stored at the top of the stack |
+| 174 | `mov %r15,%rdi` | copy r15 into rdi |
+| 175 | `mov %rdx,0x250(%rbx)` | store rbx into the structure at offset 0x250(%rbx) |
+| 176 | `movq $0xffffffffffffffff,0x260(%rbx)` | store -1{0xffffffffffffffff} at offset 0x260(rbx), likely marking a value as invalid/uninitialized |
+| 177 | `movb $0x0,0x268(%rbx)` | store 0 as a byte at offset 0x268(%rbx) clearing/resetting a flag or state field |
+| 178 | `call llama_get_sampled_token_ith@plt` | call llama_get_sampled_token_ith to retrieve the sampled token at the specified position |
+| 179 | `mov %eax,%ebp` | save the return token ID in ebp |
+| 180 | `cmp $0xffffffff,%eax` | compare the returning id eax with -1  |
+| 181 | `je 568` | jump to label 568 if eax equals -1 |
+| 182 | `call common_log_get_verbosity_thold()@plt` | call the logging subsystem to obtain the current logging verbosity threshold |
+| 183 | `cmp $0x4,%eax` | compare the logging verbosity level with 4 |
+| 184 | `jg 998` | jump to label 998 if eax is greater than 4 |
+| 185 | `2e4: cmpq $0x0,0x1e8(%rbx)` | label 2e4 checks whether the 64-bit value at offset 0 |
+| 186 | `jne 105e` | jump to label 105e if the value checked on the previous line is non zero |
+| 187 | `cmpq $0x0,0x1f0(%rbx)` | check whether the 64-bit value at offset 0x1f0 is zero  |
+| 188 | `jne 1029` | jump to label 1029 if the previous value checked is non zero |
+| 189 | `mov 0x258(%rbx),%rcx` | load the value stored at offset 0x258(%rbx) into rcx |
+| 190 | `test %rcx,%rcx` |  test whether rcx is zero by performing a bitwise AND on rxc setting the CPU flags without changing rcx |
+| 191 | `je 338` | jump to label 338 if rcx is zero  |
+| 192 | `mov 0x250(%rbx),%rdx` | load the value stored at offset 0x250(%rbx) into rdx |
+| 193 | `xor %eax,%eax` | clears eax,setting it to zero. This initializes the loop counter |
+| 194 | `jmp 32d` | unconditionally jump to label 32d entering the loop's condition check |
+| 195 | `nop` | No operation |
+| 196 | `320: add $0x1,%rax` | label 320, increment the loop counter rax by 1 |
+| 197 | `add $0xc,%rdx` | advances rdx by 12 bytes, moving the next entry in the data structure |
+| 198 | `cmp %rax,%rcx` | compare rax with rcx[loop counter with the number of entries stored] |
+| 199 | `je 338` | jump to label 338 if rax is equal to rcx |
+| 200 | `32d: cmp %ebp,(%rdx)` | label 32d compare ebp to rdx [sampled token ID cmp with the 32-bit value stored at the mem address pointed by rdx]|
+| 201 | `jne 320` | jump to label 320 if rdx not equal to ebp |
+| 202 | `mov %rax,0x260(%rbx)` | store rax at offset 0x260(%rbx)  |
+| 203 | `338: mov 0x8(%rsp),%rdi` | label 338 load the value stored at stack offset 0x8 into rdi, preparing the argument for the destructor call |
+| 204 | `call common_time_meas::~common_time_meas()@plt` | call the common_time_meas destructor, cleaning up the timing-measurement object |
+| 205 | `mov 0x68(%rsp),%rax` | load the saved stack-canary value from 0x68(%rsp) into rax |
+| 206 | `sub %fs:0x28,%rax` | substract the current thread-local stack-canary value from the saved value to check whether the stack has been corrupted |
+| 207 | `jne f91` | jump to label f91 if the stack-canary values differ, indicating possible stack corruption |
+| 208 | `add $0x78,%rsp` | release 0x78(120) bytes of stack space used by the function |
+| 209 | `mov %ebp,%eax` | move the function's result/token ID from ebp into eax, the standard return-value register |
+| 210 | `pop %rbx` | restore the saved rbx register from the stack |
+| 211 | `pop %rbp` | restore the saved rbp register from the stack |
+| 212 | `pop %r12` | restore the saved r12 register from the stack |
+| 213 | `pop %r13` | restore the saved r13 register from the stack |
+| 214 | `pop %r14` | restore the saved r14 register from the stack |
+| 215 | `pop %r15` | restore the saved r15 register from the stack |
+| 216 | `← ret` | return from the current function to the caller |
+| 217 | `nop` | No operation |
+| 218 | `370: test %rbp,%rbp` | label 370 test whether the rbp is zero by performing a bitwise AND [ %rbp & %rbp] setting the CPU flags without modifying rbp |
+| 219 | `je a70` | jump tp label a70 if rbp is zero |
+| 220 | `call llama_get_sampled_logits_count_ith@plt` | call llama_get_sampled_logits_count_ith to obtain the number of sampled logits for the specified position |
+| 221 | `mov 0x240(%rbx),%rcx` |  load the value at offset 0x240(%rbx) into rcx |
+| 222 | `mov %eax,%r14d` | save the returned sampled-logit count in r14d |
+| 223 | `mov 0x238(%rbx),%rdx` | load the value at offset(%rbx) into rdx|
+| 224 | `movabs $0xaaaaaaaaaaaaaaab,%rdi` | load the compiler-generated magic constant used as part of an optimized division-by-3 calculation |
+| 225 | `mov %r14,%r13` | copy the sampled-logit count from r14 into r13 |
+| 226 | `mov %rcx,%rax` | copy rcx into rax as the starting value of an address/size calculation |
+| 227 | `sub %rdx,%rax` | subtract rdx from rax,calculating the difference between the 2 values |
+| 228 | `sar $0x2,%rax` | arithmetic right-shift rax by 2 bits,effectively dividing by 4 |
+| 229 | `imul %rdi,%rax` | multiply rax by the magic constant as part of the compiler's optimized division calculation |
+| 230 | `mov %rax,%rsi` | copy the calculated value into rsi |
+| 231 | `cmp %r14,%rax` | compare r14 with rax |
+| 232 | `jb b20` | jump to label b20 if rax is bellow r14 in an unsigned comparison |
+| 233 | `cmp %rax,%r14` | compare rax with r14 |
+| 234 | `jae 3de` | jump to label 3de if r14 is greater than or equal to rax in an unsigned comparison |
+| 235 | `lea (%r14,%r14,2),%rax` | calculate r14 + ra14 * 2 and store the result in rax |
+| 236 | `shl $0x2,%rax` | shift-left rax by 2 bits,multiplying it by 4 |
+| 237 | `lea (%rdx,%rax,1),%r8` | calculate rdx + rax producing an address offset by 12 * r14 |
+| 238 | `cmp %r8,%rcx` | conpare rcx with the calculated address r8 |
+| 239 | `je 3de` | jump to label 3de if rcx equal to r8 |
+| 240 | `sar $0x2,%rax` | divide rax by 4,using an arithmetic right shift |
+| 241 | `mov %r8,0x240(%rbx)` | store the newly calculated pointer/counter into the structure at offset 0x240(%rbx) |
+| 242 | `imul %rdi,%rax` | multiply rax by the magic constant as part of another optimized division calculation |
+| 243 | `mov %rax,%rsi` | copy the result into rsi |
+| 244 | `3de: test %r13d,%r13d` | laber 3de test whether the sampled-logit count in r13d is zero |
+| 245 | `je 2a0` | jump to label 2a0 if r13d equals 0,skipping the processing loop |
+| 246 | `cmp $0x8,%r13d` | compare r13d with 8 |
+| 247 | `jbe a38` | jump to label a38 if the counter r13d is less than or equal to 8 using an unsigned comparison |
+| 248 | `3f1: lea 0x0(,%r14,4),%rcx` | label 3f1  |
 | 249 | `lea (%r14,%r14,2),%rax` | |
 | 250 | `shl $0x2,%rax` | |
 | 251 | `lea 0x0(%rbp,%rcx,1),%rdi` | |
