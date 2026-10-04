@@ -5,6 +5,11 @@ The profiling percentages, navigation arrows, and TUI decorations have been remo
 
 > **How to use:** Add the meaning of each instruction in the **Explanation** column.
 
+## Visual Example of the Structure 
+ <img width="1312" height="1199" alt="image" src="https://github.com/user-attachments/assets/bc6cec6f-c124-4f8e-9e59-518666ecc897" />
+
+
+## Assembly Explained 
 | # | Assembly instruction | Explanation |
 |---:|---|---|
 | 1 | `push %r15` | save register r15 on stack |
