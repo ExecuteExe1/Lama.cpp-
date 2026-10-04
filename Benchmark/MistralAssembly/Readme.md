@@ -360,153 +360,153 @@ The profiling percentages, navigation arrows, and TUI decorations have been remo
 | 351 | `mov %r12,%rsi` | copy r12 into rsi |
 | 352 | `call llama_sampler_apply@plt` | call llama_sampler_apply again|
 | 353 | `mov 0x260(%rbx),%rax` | load the 64-bit value at rbx + 0x260 into rax |
-| 354 | `mov 0x250(%rbx),%r8` | |
-| 355 | `cmpb $0x0,0x14(%rsp)` | |
-| 356 | `lea (%rax,%rax,2),%rax` | |
-| 357 | `lea (%r8,%rax,4),%rax` | |
-| 358 | `mov (%rax),%ebp` | |
-| 359 | `jne 338` | |
-| 360 | `mov 0x1e8(%rbx),%rdi` | |
-| 361 | `test %rdi,%rdi` | |
-| 362 | `je 338` | |
-| 363 | `mov 0x1f0(%rbx),%rax` | |
-| 364 | `test %rax,%rax` | |
-| 365 | `je 60d` | |
-| 366 | `cmpb $0x0,0xd0(%rbx)` | |
-| 367 | `jne b8c` | |
-| 368 | `60d: lea 0x24(%rsp),%rax` | |
-| 369 | `lea 0x40(%rsp),%rsi` | |
-| 370 | `mov %ebp,0x24(%rsp)` | |
-| 371 | `movq $0x3f800000,0x28(%rsp)` | |
-| 372 | `movq $0x0,0x58(%rsp)` | |
-| 373 | `movq $0x1,0x48(%rsp)` | |
-| 374 | `movq $0xffffffffffffffff,0x50(%rsp)` | |
-| 375 | `mov %rax,0x40(%rsp)` | |
-| 376 | `call llama_sampler_apply@plt` | |
-| 377 | `mov 0x40(%rsp),%rax` | |
-| 378 | `movss std::_Sp_make_shared_tag::_S_ti()::__tag+0x750,%xmm0` | |
-| 379 | `ucomiss 0x4(%rax),%xmm0` | |
-| 380 | `jbe 338` | |
-| 381 | `mov (%rsp),%r13d` | |
-| 382 | `mov %r15,%rdi` | |
-| 383 | `mov %r13d,%esi` | |
-| 384 | `call llama_get_sampled_probs_ith@plt` | |
-| 385 | `mov %r13d,%esi` | |
-| 386 | `mov %r15,%rdi` | |
-| 387 | `mov %rax,%r14` | |
-| 388 | `call llama_get_sampled_logits_ith@plt` | |
-| 389 | `mov %r13d,%esi` | |
-| 390 | `mov %r15,%rdi` | |
-| 391 | `mov %r13d,(%rsp)` | |
-| 392 | `mov %rax,%rbp` | |
-| 393 | `call llama_get_sampled_candidates_ith@plt` | |
-| 394 | `mov %r15,%rdi` | |
-| 395 | `mov %rax,%r13` | |
-| 396 | `call llama_get_model@plt` | |
-| 397 | `mov %rax,%rdi` | |
-| 398 | `call llama_model_get_vocab@plt` | |
-| 399 | `mov %rax,%rdi` | |
-| 400 | `call llama_vocab_n_tokens@plt` | |
-| 401 | `mov %eax,0x14(%rsp)` | |
-| 402 | `mov (%rsp),%esi` | |
-| 403 | `mov %r15,%rdi` | |
-| 404 | `test %r14,%r14` | |
-| 405 | `je bd0` | |
-| 406 | `call llama_get_sampled_probs_count_ith@plt` | |
-| 407 | `mov 0x240(%rbx),%rdi` | |
-| 408 | `mov %eax,%r10d` | |
-| 409 | `mov 0x238(%rbx),%rdx` | |
-| 410 | `movabs $0xaaaaaaaaaaaaaaab,%rsi` | |
-| 411 | `mov %r10,(%rsp)` | |
-| 412 | `mov %r10,%r15` | |
-| 413 | `mov %rdi,%rax` | |
-| 414 | `sub %rdx,%rax` | |
-| 415 | `sar $0x2,%rax` | |
-| 416 | `imul %rsi,%rax` | |
-| 417 | `mov %rax,%rcx` | |
-| 418 | `cmp %r10,%rax` | |
-| 419 | `jb dfd` | |
-| 420 | `cmp %rcx,%r10` | |
-| 421 | `jae 726` | |
-| 422 | `lea (%r10,%r10,2),%rax` | |
-| 423 | `shl $0x2,%rax` | |
-| 424 | `lea (%rdx,%rax,1),%r8` | |
-| 425 | `cmp %r8,%rdi` | |
-| 426 | `je 726` | |
-| 427 | `sar $0x2,%rax` | |
-| 428 | `mov %r8,0x240(%rbx)` | |
-| 429 | `imul %rsi,%rax` | |
-| 430 | `mov %rax,%rcx` | |
-| 431 | `726: test %r15d,%r15d` | |
-| 432 | `je 8c6` | |
-| 433 | `72f: cmp $0x4,%r15d` | |
-| 434 | `jbe dc2` | |
-| 435 | `mov (%rsp),%rdi` | |
-| 436 | `lea 0x4(%rdx),%rsi` | |
-| 437 | `lea 0x0(,%rdi,4),%rax` | |
-| 438 | `lea (%rdi,%rdi,2),%rdi` | |
-| 439 | `shl $0x2,%rdi` | |
-| 440 | `lea 0x0(%rbp,%rax,1),%r8` | |
-| 441 | `lea (%rdx,%rdi,1),%r9` | |
-| 442 | `cmp %r8,%rsi` | |
-| 443 | `setae %r8b` | |
-| 444 | `cmp %r9,%rbp` | |
-| 445 | `setae %r10b` | |
-| 446 | `or %r10d,%r8d` | |
-| 447 | `lea (%r14,%rax,1),%r10` | |
-| 448 | `cmp %r10,%rsi` | |
-| 449 | `setae %sil` | |
-| 450 | `cmp %r9,%r14` | |
-| 451 | `setae %r9b` | |
-| 452 | `or %r9d,%esi` | |
-| 453 | `test %sil,%r8b` | |
-| 454 | `je dc2` | |
-| 455 | `lea -0x8(%rdx,%rdi,1),%rsi` | |
-| 456 | `cmp %rsi,%r13` | |
-| 457 | `setae %sil` | |
-| 458 | `add %r13,%rax` | |
-| 459 | `cmp %rax,%rdx` | |
-| 460 | `setae %al` | |
-| 461 | `or %al,%sil` | |
-| 462 | `je dc2` | |
-| 463 | `mov %r15d,%esi` | |
-| 464 | `mov %rdx,(%rsp)` | |
-| 465 | `mov %rdx,%rax` | |
-| 466 | `shr $0x2,%esi` | |
-| 467 | `shl $0x4,%rsi` | |
-| 468 | `mov %rsi,%rdi` | |
-| 469 | `xor %esi,%esi` | |
-| 470 | `mov %rdi,%rdx` | |
-| 471 | `7c0: lea 0x0(%r13,%rsi,1),%rdi` | |
-| 472 | `add $0x30,%rax` | |
-| 473 | `mov 0xc(%rdi),%r8d` | |
-| 474 | `mov 0x8(%rdi),%r9d` | |
-| 475 | `mov 0x4(%rdi),%r10d` | |
-| 476 | `mov (%rdi),%r11d` | |
-| 477 | `lea 0x0(%rbp,%rsi,1),%rdi` | |
-| 478 | `movss 0xc(%rdi),%xmm0` | |
-| 479 | `movss 0x8(%rdi),%xmm1` | |
-| 480 | `movss 0x4(%rdi),%xmm2` | |
-| 481 | `movss (%rdi),%xmm3` | |
-| 482 | `lea (%r14,%rsi,1),%rdi` | |
-| 483 | `add $0x10,%rsi` | |
-| 484 | `movss 0xc(%rdi),%xmm4` | |
-| 485 | `movss 0x8(%rdi),%xmm5` | |
-| 486 | `movss 0x4(%rdi),%xmm6` | |
-| 487 | `movss (%rdi),%xmm7` | |
-| 488 | `mov %r11d,-0x30(%rax)` | |
-| 489 | `unpcklps %xmm5,%xmm1` | |
-| 490 | `unpcklps %xmm4,%xmm0` | |
-| 491 | `mov %r10d,-0x24(%rax)` | |
-| 492 | `unpcklps %xmm7,%xmm3` | |
-| 493 | `unpcklps %xmm6,%xmm2` | |
-| 494 | `mov %r9d,-0x18(%rax)` | |
-| 495 | `mov %r8d,-0xc(%rax)` | |
-| 496 | `movlps %xmm3,-0x2c(%rax)` | |
-| 497 | `movlps %xmm2,-0x20(%rax)` | |
-| 498 | `movlps %xmm1,-0x14(%rax)` | |
-| 499 | `movlps %xmm0,-0x8(%rax)` | |
-| 500 | `cmp %rsi,%rdx` | |
+| 354 | `mov 0x250(%rbx),%r8` | load a pointer/value from the object at rbx + 0x250 into r8 |
+| 355 | `cmpb $0x0,0x14(%rsp)` |  compare the byte at stack offset rsp+0x14 with 0 |
+| 356 | `lea (%rax,%rax,2),%rax` | compute rax = rax + 2*rax = 3*rax |
+| 357 | `lea (%r8,%rax,4),%rax` | compute rax = r8 + 4*(3*old_rax) effectively an indexed address calculation. |
+| 358 | `mov (%rax),%ebp` | load the 32-bit value at that address into ebp |
+| 359 | `jne 338` | if the byte checked at line 355 was not zero, jump back to 338 |
+| 360 | `mov 0x1e8(%rbx),%rdi` | load another pointer/value from rbx + 0x1e8 into rdi (first argument register) |
+| 361 | `test %rdi,%rdi` | test whether rdi is 0 |
+| 362 | `je 338` | if it is 0, jump back to 338 |
+| 363 | `mov 0x1f0(%rbx),%rax` | load another pointer/value from rbx + 0x1f0 |
+| 364 | `test %rax,%rax` | check whether it is 0 |
+| 365 | `je 60d` | if zero, jump to label 60d |
+| 366 | `cmpb $0x0,0xd0(%rbx)` | check a byte flag at rbx + 0xd0 |
+| 367 | `jne b8c` | if that flag is nonzero, jump to b8c |
+| 368 | `60d: lea 0x24(%rsp),%rax` | set rax = rsp + 0x24; this is a pointer to a local stack structure |
+| 369 | `lea 0x40(%rsp),%rsi` | set rsi = rsp + 0x40; another local structure/address |
+| 370 | `mov %ebp,0x24(%rsp)` | store the token ID/value from ebp into the local structure |
+| 371 | `movq $0x3f800000,0x28(%rsp)` | store 0x3f800000 at rsp+0x28. 0x3f800000 is the IEEE-754 representation of 1.0f |
+| 372 | `movq $0x0,0x58(%rsp)` | initialize a local field to 0 |
+| 373 | `movq $0x1,0x48(%rsp)` | initialize a local field to 1 |
+| 374 | `movq $0xffffffffffffffff,0x50(%rsp)` | initialize a field to -1 |
+| 375 | `mov %rax,0x40(%rsp)` | store the pointer to the local token structure into the structure at rsp+0x40 |
+| 376 | `call llama_sampler_apply@plt` | call the llama.cpp sampler.This is the key operation in this section |
+| 377 | `mov 0x40(%rsp),%rax` | reload the pointer/field modified or used by llama_sampler_apply |
+| 378 | `movss std::_Sp_make_shared_tag::_S_ti()::__tag+0x750,%xmm0` | load a single-precision floating-point constant into xmm0 |
+| 379 | `ucomiss 0x4(%rax),%xmm0` | compare the float at rax+4 with that constant |
+| 380 | `jbe 338` | if the comparison is less than or equal,jump back to 338 |
+| 381 | `mov (%rsp),%r13d` | load a 32-bit value from the stack into r13d.This is likely a sequence/token index |
+| 382 | `mov %r15,%rdi` | place the r15 pointer into the first argument register |
+| 383 | `mov %r13d,%esi` | place the index from r13d into the second argument register |
+| 384 | `call llama_get_sampled_probs_ith@plt` | get the sampled probabilities for item/index r13d |
+| 385 | `mov %r13d,%esi` | prepare the same index as the second argument |
+| 386 | `mov %r15,%rdi` | restore the first argument |
+| 387 | `mov %rax,%r14` | save the returned probability pointer in r14 |
+| 388 | `call llama_get_sampled_logits_ith@plt` | get the sampled logits for the same item/index |
+| 389 | `mov %r13d,%esi` | again prepare the index argument |
+| 390 | `mov %r15,%rdi` | prepare the context/object pointer |
+| 391 | `mov %r13d,(%rsp)` | save the index back onto the stack |
+| 392 | `mov %rax,%rbp` | save the returned logits pointer in rbp |
+| 393 | `call llama_get_sampled_candidates_ith@plt` | get the candidate tokens for this sampled item |
+| 394 | `mov %r15,%rdi` | prepare the llama context/object as first argument |
+| 395 | `mov %rax,%r13` | save the returned candidates pointer in r13 |
+| 396 | `call llama_get_model@plt` | retriece the underlying llama model |
+| 397 | `mov %rax,%rdi` | pass the model as the first argument |
+| 398 | `call llama_model_get_vocab@plt` | retrieve the model's vocabulary object |
+| 399 | `mov %rax,%rdi` | pass the vocabulary object to the next function |
+| 400 | `call llama_vocab_n_tokens@plt` | get the number of tokens in the vocabulary |
+| 401 | `mov %eax,0x14(%rsp)` | save the return value from llama_vocab_n_tokens() into a local stack variable.This is the vocabulary size |
+| 402 | `mov (%rsp),%esi` | load the previously saved index into esi, 2nd function argument |
+| 403 | `mov %r15,%rdi` | place the llama context/object pointer into rdi, 1st argument |
+| 404 | `test %r14,%r14` | check whether the probability pointer saved in r14 is 0 |
+| 405 | `je bd0` | If the probability pointer is 0, jump to bd0 |
+| 406 | `call llama_get_sampled_probs_count_ith@plt` | get the number of sampled probabilities for this index.Return value is in eax |
+| 407 | `mov 0x240(%rbx),%rdi` | load a pointer from rbx+0x240 into rdi |
+| 408 | `mov %eax,%r10d` | copie the probability count into r10d |
+| 409 | `mov 0x238(%rbx),%rdx` | load another pointer from rbx+0x238 into rdx |
+| 410 | `movabs $0xaaaaaaaaaaaaaaab,%rsi` | load the constant 0xAAAAAAAAAAAAAAAB into rsi.This is a magic constant used for fast integer division |
+| 411 | `mov %r10,(%rsp)` | save the sampled-probability count on the stack |
+| 412 | `mov %r10,%r15` | copie the count into r15,r15 now represents the number of elements being processed |
+| 413 | `mov %rdi,%rax` | copy the pointer from rdi to rax |
+| 414 | `sub %rdx,%rax` | calculate rdi - rdx, i.e the distance between 2 memory pointers |
+| 415 | `sar $0x2,%rax` | arithmetic shift right by 2, divides by 4 bytes.This converts a byte distance into a number of 4-byte elements |
+| 416 | `imul %rsi,%rax` | multiply by the magic constant.This implements a compiler-optimized integer division |
+| 417 | `mov %rax,%rcx` | copy the calculated value into rcx |
+| 418 | `cmp %r10,%rax` | compare the calculated capacity/index against the sampled-probability count |
+| 419 | `jb dfd` | If rax < r10,jump to dfd.Likely handles an insufficient-capacity/reallocation path |
+| 420 | `cmp %rcx,%r10` | compare the count against the calculated value|
+| 421 | `jae 726` | if r10 >= rcx,jump to 726 |
+| 422 | `lea (%r10,%r10,2),%rax` | calculate rax = 3*r10 |
+| 423 | `shl $0x2,%rax` | multiply by 4,rax=12*r20 |
+| 424 | `lea (%rdx,%rax,1),%r8` | calculate r8 = rdx + 12*r10.This is an address for the element at index r10 |
+| 425 | `cmp %r8,%rdi` | check whether this calculated address equals the current end pointer |
+| 426 | `je 726` | if equal,jump to 726 |
+| 427 | `sar $0x2,%rax` | divide the byte offset by 4 |
+| 428 | `mov %r8,0x240(%rbx)` | update the pointer at rbx+0x240 to the newly calculated address |
+| 429 | `imul %rsi,%rax` | again applies the magic multiplication/division optimization |
+| 430 | `mov %rax,%rcx` | save the resulting calculated element count |
+| 431 | `726: test %r15d,%r15d` | test whether the sampled-probability count is 0|
+| 432 | `je 8c6` | if 0,jump to 8c6,nothing to process |
+| 433 | `72f: cmp $0x4,%r15d` | compare the count with 4 |
+| 434 | `jbe dc2` | if count less than or equal to 4 then jump to dc2 |
+| 435 | `mov (%rsp),%rdi` | reload the sampled-probability count |
+| 436 | `lea 0x4(%rdx),%rsi` | calculate rsi = rdx + 4, one 32-bit element past the start |
+| 437 | `lea 0x0(,%rdi,4),%rax` | calculate rax = count * 4 |
+| 438 | `lea (%rdi,%rdi,2),%rdi` | calculate rdi = 3 * count |
+| 439 | `shl $0x2,%rdi` | multiply by 4 rdi = 12 * count |
+| 440 | `lea 0x0(%rbp,%rax,1),%r8` | calculate r8 = rbp + count×4 |
+| 441 | `lea (%rdx,%rdi,1),%r9` | calculate r9 = rdx + count×12 |
+| 442 | `cmp %r8,%rsi` |  compare the beginning/next element address against the calculated array boundary |
+| 443 | `setae %r8b` | set r8b = 1 if rsi >= r8,otherwise 0 |
+| 444 | `cmp %r9,%rbp` | compare another pointer against the calculated candidate-array boundary |
+| 445 | `setae %r10b` | set r10b = 1 if rbp >= r9 |
+| 446 | `or %r10d,%r8d` | combine the 2 Boolean conditions |
+| 447 | `lea (%r14,%rax,1),%r10` | calculate r10 = r14 + count×4.Yhis is likely the end of the probability array |
+| 448 | `cmp %r10,%rsi` |  compare the relevant pointer against that probability-array boundary |
+| 449 | `setae %sil` | set sil = 1 if rsi >=10 |
+| 450 | `cmp %r9,%r14` | compare the probability-array pointer against the candidate-array boundary |
+| 451 | `setae %r9b` | set r9b = 1 if r14 >= r9 |
+| 452 | `or %r9d,%esi` | combine the 2 Boolean conditions |
+| 453 | `test %sil,%r8b` | test the Boolean flags accumulated in sil and r8b |
+| 454 | `je dc2` | if the relevant conditions are false,jump to dc2 |
+| 455 | `lea -0x8(%rdx,%rdi,1),%rsi` | calculate rsi = rdx + rdi - 8.This establishes another memory boundary |
+| 456 | `cmp %rsi,%r13` | compare the candidate pointer in r13 against the boundary |
+| 457 | `setae %sil` | sil = 1 if r13 >= rsi,otherwise 0 |
+| 458 | `add %r13,%rax` | add the candidaye pointer r13 to rax |
+| 459 | `cmp %rax,%rdx` | compare the resulting address against rdx |
+| 460 | `setae %al` | al = 1 if rdx >= rax,otherwise 0 |
+| 461 | `or %al,%sil` | combines the 2 Boolean conditions |
+| 462 | `je dc2` | if neither conditions is true,jump to dc2 |
+| 463 | `mov %r15d,%esi` | copy the sampled-element count into esi |
+| 464 | `mov %rdx,(%rsp)` | save rdx to the stack |
+| 465 | `mov %rdx,%rax` | copy rdx into rax,rax becomes the destination/current pointer |
+| 466 | `shr $0x2,%esi` | divide the element count by 4 |
+| 467 | `shl $0x4,%rsi` | multiply by 16 |
+| 468 | `mov %rsi,%rdi` | copy this calculated byte into rdi |
+| 469 | `xor %esi,%esi` | set esi = 0.This becomes the loop offset |
+| 470 | `mov %rdi,%rdx` | save the calculated size in rdx |
+| 471 | `7c0: lea 0x0(%r13,%rsi,1),%rdi` | calculate rdi = r13 + rsi.This is the source address for the current iteration |
+| 472 | `add $0x30,%rax` | advance destination pointer by 48 bytes |
+| 473 | `mov 0xc(%rdi),%r8d` | load a 32-bit field at offset +12 |
+| 474 | `mov 0x8(%rdi),%r9d` | load a 32-bit field at +8 |
+| 475 | `mov 0x4(%rdi),%r10d` | load a 32-bit field at offset +4 |
+| 476 | `mov (%rdi),%r11d` | load the first 32-bit field at offset +0 |
+| 477 | `lea 0x0(%rbp,%rsi,1),%rdi` | calculate another source address rdi = rbp + offset |
+| 478 | `movss 0xc(%rdi),%xmm0` | load a 32-bit float from offset +12 |
+| 479 | `movss 0x8(%rdi),%xmm1` | load a float from offset +8 |
+| 480 | `movss 0x4(%rdi),%xmm2` | load a float from offset +4 |
+| 481 | `movss (%rdi),%xmm3` | load a float from offset +0 |
+| 482 | `lea (%r14,%rsi,1),%rdi` | calculate another source address r14 + offset |
+| 483 | `add $0x10,%rsi` |  advance the loop offset by 16 |
+| 484 | `movss 0xc(%rdi),%xmm4` | load another float  |
+| 485 | `movss 0x8(%rdi),%xmm5` | load another float |
+| 486 | `movss 0x4(%rdi),%xmm6` | load another float |
+| 487 | `movss (%rdi),%xmm7` | load another float |
+| 488 | `mov %r11d,-0x30(%rax)` | store the first 32-bit field into the destination |
+| 489 | `unpcklps %xmm5,%xmm1` |interleaves the low floats of xmm1 and xmm5 |
+| 490 | `unpcklps %xmm4,%xmm0` | interleaves the low floats of xmm0 and xmm4 |
+| 491 | `mov %r10d,-0x24(%rax)` | store another 32-bit field |
+| 492 | `unpcklps %xmm7,%xmm3` | interleaves floats from xmm7 and xmm3 |
+| 493 | `unpcklps %xmm6,%xmm2` | interleaves floats from xmm6 and xmm2 |
+| 494 | `mov %r9d,-0x18(%rax)` | store another 32-bit field |
+| 495 | `mov %r8d,-0xc(%rax)` | store the 4th 32-bit field |
+| 496 | `movlps %xmm3,-0x2c(%rax)` | store 2 32-bit floats from xmm3 into the destination |
+| 497 | `movlps %xmm2,-0x20(%rax)` | store 2 floats from xmm2 |
+| 498 | `movlps %xmm1,-0x14(%rax)` | store 2 floats from xmm1 |
+| 499 | `movlps %xmm0,-0x8(%rax)` | store 2 floats from xmm0 |
+| 500 | `cmp %rsi,%rdx` | compare the current loop offset against the total size to determine whether the loop is finished|
 | 501 | `jne 7c0` | |
 | 502 | `mov %r15d,%eax` | |
 | 503 | `mov (%rsp),%rdx` | |
