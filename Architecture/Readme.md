@@ -55,7 +55,7 @@ llama.cpp/
 ├── flake.nix       The flake interface to llama.cpp's Nix expressions. The flake is used as a more discoverable entry-point, as well as a way to pin the dependencies and
 |                   expose default outputs, including the outputs built by the CI.
 |
-├── ggml           
+├── ggml            Cuda Magic
 ├── gguf-py
 ├── grammars
 ├── include
